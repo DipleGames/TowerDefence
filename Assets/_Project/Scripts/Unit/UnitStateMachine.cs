@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
-public class UnitController : MonoBehaviour, IChaseable
+public class UnitStateMachine : MonoBehaviour, IChaseable
 {
     public enum UnitState { Idle, Chase, Patrol }
     public UnitState unitState = UnitState.Patrol;
@@ -10,7 +10,7 @@ public class UnitController : MonoBehaviour, IChaseable
     public NavMeshAgent agent;
     public Transform point;
 
-    Coroutine _chaseCo;
+    Coroutine _chaseCoroutine;
 
     void Awake()
     {
@@ -25,10 +25,10 @@ public class UnitController : MonoBehaviour, IChaseable
     void ApplyState(UnitState state)
     {
         // 코루틴 정리
-        if (_chaseCo != null)
+        if (_chaseCoroutine != null)
         {
-            StopCoroutine(_chaseCo);
-            _chaseCo = null;
+            StopCoroutine(_chaseCoroutine);
+            _chaseCoroutine = null;
         }
 
         unitState = state;
@@ -48,40 +48,40 @@ public class UnitController : MonoBehaviour, IChaseable
             case UnitState.Chase:
                 // NavMesh 쓸 거면 transform 직접 이동 대신 SetDestination으로 구현 권장
                 agent.isStopped = true; 
-                _chaseCo = StartCoroutine(ChaseRoutine());
+                _chaseCoroutine = StartCoroutine(ChaseRoutine());
                 break;
         }
     }
-    private float _tick = 0f;
+    private float _chaseTick = 0f;
     public IEnumerator ChaseRoutine()
     {
         // 여기서는 transform 직접 이동하니까 agent는 멈춘 상태 유지
         while (true)
         {
-            _tick += Time.deltaTime;
-            if(_tick < 3f)
+            _chaseTick += Time.deltaTime;
+            if(_chaseTick < 3f)
             {
                 transform.position += new Vector3(0,0,1) * 1f * Time.deltaTime;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-            else if(_tick < 6f)
+            else if(_chaseTick < 6f)
             {
                 transform.position += new Vector3(-1,0,0) * 1f * Time.deltaTime;
                 transform.rotation = Quaternion.Euler(0, 270, 0);
             }
-            else if(_tick < 9f)
+            else if(_chaseTick < 9f)
             {
                 transform.position += new Vector3(0,0,-1) * 1f * Time.deltaTime;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
-            else if(_tick < 12f)
+            else if(_chaseTick < 12f)
             {
                 transform.position += new Vector3(1,0,0) * 1f * Time.deltaTime;
                 transform.rotation = Quaternion.Euler(0, 90, 0);
             }
-            else if (_tick >= 12f)
+            else if (_chaseTick >= 12f)
             {
-                _tick = 0f;
+                _chaseTick = 0f;
             }
             yield return null;
         }

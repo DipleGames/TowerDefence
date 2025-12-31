@@ -50,7 +50,7 @@ public class MonsterStateMachine : MonoBehaviour
     {
         _currentWayPointIndex++;
 
-        // 순환 (0 ~ Count-1)
+        //순환 (0 ~ Count-1)
         if (_currentWayPointIndex >= WayPointManager.wayPoints.Count)
         {
             _currentWayPointIndex = 0;

@@ -1,20 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TowerStateMachine : MonoBehaviour
+public class TowerStateMachine : Machine
 {
-    public enum TowerState { Active, InActive }
-
-    public TowerState towerState = TowerState.Active;
+    [Header("타워 상태")]
+    public MachineState towerState = MachineState.Active;
+    [Header("타워 컨트롤러")]
     public TowerController towerController;
-
-    [Header("타워 활성화 시간")]
-    public float maxActiveTime;
-    public float activeTime;
-
-    [Header("타워 활성화 / 비활성화 머터리얼")]
-    public Material Mat_Active;
-    public Material Mat_InActive;
 
     void Start()
     {
@@ -25,28 +17,28 @@ public class TowerStateMachine : MonoBehaviour
     {
         switch(towerState)
         {
-            case TowerState.Active:
+            case MachineState.Active:
                 ApplyActiveState();
                 break;
-            case TowerState.InActive:
+            case MachineState.InActive:
                 ApplyInActiveState();
                 break;
         }
     }
 
-    public void ChangeTowerState(TowerState towerState)
+    public void ChangeTowerState(MachineState towerState)
     {
         this.towerState = towerState;
         ApplyTowerState();
     }
 
-    void ApplyActiveState()
+    public override void ApplyActiveState()
     {
         GetComponentInChildren<MeshRenderer>().material = Mat_Active;
         StartCoroutine(towerController.AttackRoutine());
     }
 
-    void ApplyInActiveState()
+    public override void ApplyInActiveState()
     {
         GetComponentInChildren<MeshRenderer>().material = Mat_InActive;
         Debug.Log("타워가 비활성화 됐습니다.");

@@ -34,7 +34,7 @@ public class TowerManager : SingleTon<TowerManager>
         Debug.Log($"{towerStateMachine}를 수리하고있습니다..");
         
         yield return new WaitForSeconds(2f);
-        towerStateMachine.ChangeTowerState(TowerStateMachine.TowerState.Active);
+        towerStateMachine.ChangeTowerState(MachineState.Active);
         yield break;
     }
 }

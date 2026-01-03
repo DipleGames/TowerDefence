@@ -294,12 +294,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c8579bf9a974d40a2a068a4cb73333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerState: 0
-  towerController: {fileID: 8504811357119620222}
-  maxActiveTime: 10
+  maxActiveTime: 60
   activeTime: 0
   Mat_Active: {fileID: 2100000, guid: c0c1d95b32eb02345ab1adf50b065667, type: 2}
   Mat_InActive: {fileID: 2100000, guid: 545b9a796fdf6894aaa746ce0d2eec35, type: 2}
+  towerState: 0
+  towerController: {fileID: 8504811357119620222}
 --- !u!114 &8504811357119620222
 MonoBehaviour:
   m_ObjectHideFlags: 0

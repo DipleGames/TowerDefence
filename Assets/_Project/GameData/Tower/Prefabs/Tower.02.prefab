@@ -207,7 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerState: 0
   towerController: {fileID: 6693896103143118532}
-  maxActiveTime: 0
+  maxActiveTime: 120
   activeTime: 0
   Mat_Active: {fileID: 2100000, guid: c0c1d95b32eb02345ab1adf50b065667, type: 2}
   Mat_InActive: {fileID: 2100000, guid: 545b9a796fdf6894aaa746ce0d2eec35, type: 2}

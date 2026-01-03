@@ -15,13 +15,13 @@ public class TowerController : MonoBehaviour, IAttackable
 
     void Update()
     {
-        if(towerStateMachine.towerState == TowerStateMachine.TowerState.Active)
+        if(towerStateMachine.towerState == MachineState.Active)
         {
             towerStateMachine.activeTime += Time.deltaTime;
 
             if(towerStateMachine.activeTime >= towerStateMachine.maxActiveTime)
             {
-                towerStateMachine.ChangeTowerState(TowerStateMachine.TowerState.InActive);  
+                towerStateMachine.ChangeTowerState(MachineState.InActive);  
                 towerStateMachine.activeTime = 0f;
             } 
         }
@@ -47,7 +47,7 @@ public class TowerController : MonoBehaviour, IAttackable
 
     public IEnumerator AttackRoutine()
     {
-        while(towerStateMachine.towerState == TowerStateMachine.TowerState.Active)
+        while(towerStateMachine.towerState == MachineState.Active)
         {
             foreach(var monster in towerModel.monsters)
             {

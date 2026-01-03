@@ -246,6 +246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Road
       objectReference: {fileID: 0}
+    - target: {fileID: 7910470222192840926, guid: 0e9b7c648189f6a4eadd169052c39a04, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -322,7 +326,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4094345211672303950, guid: 9ce0620d7f0d4e544be855453f2a9dcd, type: 3}
   m_PrefabInstance: {fileID: 4189892080345906522}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2494316971578963116
+--- !u!114 &7865219570531478305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 374756701169707872}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 2, y: 4, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -151,9 +151,10 @@ GameObject:
   - component: {fileID: 8784144841693791382}
   - component: {fileID: 4289968243516913745}
   - component: {fileID: 6693896103143118532}
+  - component: {fileID: 1939428296980053671}
   - component: {fileID: 5459062865605590636}
   m_Layer: 0
-  m_Name: Tower.02
+  m_Name: MainTowerRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectRange: 8
   attackDamage: 10
-  attackDelay: 0
+  attackDelay: 0.5
   monsters: []
 --- !u!114 &4289968243516913745
 MonoBehaviour:
@@ -205,12 +206,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c8579bf9a974d40a2a068a4cb73333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerState: 0
-  towerController: {fileID: 6693896103143118532}
-  maxActiveTime: 120
+  maxActiveTime: 360
   activeTime: 0
   Mat_Active: {fileID: 2100000, guid: c0c1d95b32eb02345ab1adf50b065667, type: 2}
   Mat_InActive: {fileID: 2100000, guid: 545b9a796fdf6894aaa746ce0d2eec35, type: 2}
+  towerState: 0
+  towerController: {fileID: 6693896103143118532}
 --- !u!114 &6693896103143118532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +227,19 @@ MonoBehaviour:
   towerModel: {fileID: 8784144841693791382}
   towerStateMachine: {fileID: 4289968243516913745}
   detectSensor: {fileID: 5794420083551983604}
+--- !u!114 &1939428296980053671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3778294655561288271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3e1550e039ae04a87fb9e11f6684ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiRoot: {fileID: 7376599396513665569}
 --- !u!54 &5459062865605590636
 Rigidbody:
   m_ObjectHideFlags: 0

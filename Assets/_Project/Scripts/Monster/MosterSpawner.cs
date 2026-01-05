@@ -1,22 +1,12 @@
 using UnityEngine;
 
-public class MonsterSpawner : MonoBehaviour
+public class MonsterSpawner : SingleTon<MonsterSpawner>
 {
     [SerializeField] private MonsterFactory factory;
 
-    [SerializeField] private float _spawnDelay = 3f;
-    private float _tick = 0f;
-    void Update()
-    {
-        _tick += Time.deltaTime;
-        if(_tick >= _spawnDelay)
-        {
-            SpawnMonster();
-            _tick = 0f;
-        }
-    }
+    public float spawnDelay = 3f;
 
-    void SpawnMonster()
+    public void SpawnMonster()
     {
         factory.Create(MonsterType.Monster, transform.position);
     }

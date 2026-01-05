@@ -13,6 +13,9 @@ public class MonsterController : MonoBehaviour, IDamageable
     {
         monsterModel.CurrentHP = monsterModel.maxHP;
     }
+
+
+
     public void TakeDamage(float amount)
     {
         monsterModel.CurrentHP -= amount;

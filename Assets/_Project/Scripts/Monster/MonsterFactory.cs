@@ -19,6 +19,6 @@ public class MonsterFactory : MonoBehaviour
             _ => null
         };
 
-        return Instantiate(prefab, pos, Quaternion.identity);
+        return Instantiate(prefab, pos, Quaternion.Euler(0f,-90f,0f));
     }
 }

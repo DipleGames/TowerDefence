@@ -1,5 +1,5 @@
-using TMPro;
-using Unity.VisualScripting;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +10,12 @@ public class HUDManager : SingleTon<HUDManager>
 
     [Header("골드 현황 텍스트")]
     public Text currGoldText;
-    
+
+    [Header("게임 현황 텍스트")]
+    public Text gameStateText;
+    public Text gameStateTimeText;
+
+
     // 뷰 체인지 버튼 클릭 시 호출
     public void OnChangeViewChangeBtnText(GirdView gridView)
     {
@@ -29,5 +34,40 @@ public class HUDManager : SingleTon<HUDManager>
     public void OnChangeCurrentGoldText(int currGold)
     {
         currGoldText.text = $"{currGold}";
+    }
+
+    public void OnChangeGameStateText(GameState gameState)
+    {
+        switch(gameState)
+        {
+            case GameState.Wave:
+                gameStateText.text = $"{gameState} {GameManager.Instance.currWave}";
+                break;
+            case GameState.Prepare:
+                gameStateText.text = $"{gameState}";
+                break;
+        }
+    }
+
+    private WaitForSeconds wait01 = new WaitForSeconds(0.1f);
+    public IEnumerator StartTimer(float duration)
+    {
+        float startTime = Time.time; // 시작한 시점의 시간 기록
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            // 실제 경과 시간 계산 (프레임 밀림 방지)
+            elapsed = Time.time - startTime;
+            float remainingTime = Mathf.Max(0, duration - elapsed);
+
+            // UI 갱신 (F1: 소수점 한자리)
+            gameStateTimeText.text = remainingTime.ToString("F1");
+
+            yield return wait01;
+        }
+
+        // 마지막에 확실히 0.0으로 표시
+        gameStateTimeText.text = "0.0";
     }
 }

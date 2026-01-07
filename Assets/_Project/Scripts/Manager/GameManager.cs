@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public enum GameState { Wave, Prepare, Pause, GameOver }
 
@@ -10,12 +11,23 @@ public class GameManager : SingleTon<GameManager>
     [Header("현재 상태")]
     public GameState gameState = GameState.Wave;
 
+    [Header("현재 웨이브")]
+    public int currWave = 0;
+
     [Header("게임 상태별 길이")]
-    [SerializeField] private float waveTime;
-    [SerializeField] private float prepareTime;
+    public float waveTime;
+    public float prepareTime;
 
     private Coroutine gameLoopRoutine;
     private Coroutine stateRoutine;
+    private Coroutine timerRoutine;
+    public event Action<GameState> OnChangedGameState;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        OnChangedGameState += HUDManager.Instance.OnChangeGameStateText;
+    }
 
     private void Start()
     {
@@ -93,18 +105,25 @@ public class GameManager : SingleTon<GameManager>
 
             // 1) Wave
             gameState = GameState.Wave;
+            currWave += 1;
+            OnChangedGameState.Invoke(gameState);
             StartStateRoutine(WaveCoroutine());
+            StartTimerRoutine(HUDManager.Instance.StartTimer(waveTime)); 
             yield return new WaitForSeconds(waveTime);
             StopStateRoutine();
+            StopTimerRoutine();
 
             if (gameState == GameState.GameOver)
                 yield break;
 
             // 2) Prepare
             gameState = GameState.Prepare;
+            OnChangedGameState.Invoke(gameState);
             StartStateRoutine(PrepareCoroutine());
+            StartTimerRoutine(HUDManager.Instance.StartTimer(prepareTime));
             yield return new WaitForSeconds(prepareTime);
             StopStateRoutine();
+            StopTimerRoutine();
         }
     }
 
@@ -120,6 +139,21 @@ public class GameManager : SingleTon<GameManager>
         {
             StopCoroutine(stateRoutine);
             stateRoutine = null;
+        }
+    }
+
+    private void StartTimerRoutine(IEnumerator routine)
+    {
+        StopTimerRoutine(); // 중복 실행 방지
+        timerRoutine = StartCoroutine(routine);
+    }
+
+    private void StopTimerRoutine()
+    {
+        if (timerRoutine != null)
+        {
+            StopCoroutine(timerRoutine);
+            timerRoutine = null;
         }
     }
 

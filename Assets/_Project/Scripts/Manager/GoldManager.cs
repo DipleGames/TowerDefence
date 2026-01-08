@@ -29,7 +29,7 @@ public class GoldManager : SingleTon<GoldManager>
         OnChangedGold.Invoke(CurrGold);
     }
 
-    public void SubtractGodld(int amount)
+    public void SubtractGold(int amount)
     {
         CurrGold -= amount;
         OnChangedGold.Invoke(CurrGold);

@@ -31,8 +31,10 @@ public class TowerManager : SingleTon<TowerManager>
 
     public IEnumerator RepairTower(TowerStateMachine towerStateMachine)
     {
+        if(GoldManager.Instance.CurrGold < 20) yield break;
+
         Debug.Log($"{towerStateMachine}를 수리하고있습니다..");
-        
+        GoldManager.Instance.SubtractGold(20);
         yield return new WaitForSeconds(2f);
         towerStateMachine.ChangeTowerState(MachineState.Active);
         yield break;

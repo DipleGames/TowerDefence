@@ -7,6 +7,7 @@ public class TowerModel : MonoBehaviour
     public float detectRange;
     public float attackDamage;
     public float attackDelay;
+    public int repairRequiredCost;
 
     
     [Header("타워가 감지한 몬스터 목록")]

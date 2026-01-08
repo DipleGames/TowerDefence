@@ -24,17 +24,17 @@ public class TowerManager : SingleTon<TowerManager>
         }
     }
 
-    public void TryRepair(TowerStateMachine towerStateMachine)
+    public void TryRepair(TowerStateMachine towerStateMachine, TowerModel towerModel)
     {
-        StartCoroutine(RepairTower(towerStateMachine));
+        StartCoroutine(RepairTower(towerStateMachine, towerModel));
     }
 
-    public IEnumerator RepairTower(TowerStateMachine towerStateMachine)
+    public IEnumerator RepairTower(TowerStateMachine towerStateMachine, TowerModel towerModel)
     {
-        if(GoldManager.Instance.CurrGold < 20) yield break;
+        if(GoldManager.Instance.CurrGold < towerModel.repairRequiredCost) yield break;
 
         Debug.Log($"{towerStateMachine}를 수리하고있습니다..");
-        GoldManager.Instance.SubtractGold(20);
+        GoldManager.Instance.SubtractGold(towerModel.repairRequiredCost);
         yield return new WaitForSeconds(2f);
         towerStateMachine.ChangeTowerState(MachineState.Active);
         yield break;

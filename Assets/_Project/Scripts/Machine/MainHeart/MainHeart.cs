@@ -23,7 +23,12 @@ public class MainHeart : MonoBehaviour
         }
     }
 
-    void Start()
+    void Awake()
+    {
+        Init();
+    }
+
+    void Init()
     {
         CurrentHP = _maxHP;
     }

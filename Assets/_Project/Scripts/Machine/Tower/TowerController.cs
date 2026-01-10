@@ -9,8 +9,7 @@ public class TowerController : MonoBehaviour, IAttackable
 
     void Awake()
     {
-        detectSensor.radius = towerModel.detectRange;
-        towerStateMachine.activeTime = 0f;
+        InitTower();
     }
 
     void Update()
@@ -25,6 +24,12 @@ public class TowerController : MonoBehaviour, IAttackable
                 towerStateMachine.activeTime = 0f;
             } 
         }
+    }
+
+    void InitTower()
+    {
+        detectSensor.radius = towerModel.detectRange;
+        towerStateMachine.activeTime = 0f;
     }
 
     void OnTriggerEnter(Collider other)

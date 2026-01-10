@@ -9,7 +9,7 @@ public class MonsterController : MonoBehaviour, IDamageable
         InitMonster();
     }
 
-    void InitMonster()
+    public void InitMonster()
     {
         monsterModel.CurrentHP = monsterModel.maxHP;
     }

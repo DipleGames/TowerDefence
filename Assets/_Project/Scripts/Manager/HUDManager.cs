@@ -36,6 +36,7 @@ public class HUDManager : SingleTon<HUDManager>
         currGoldText.text = $"{currGold}";
     }
 
+    // 게임 상태가 바뀔 시 호출
     public void OnChangeGameStateText(GameState gameState)
     {
         switch(gameState)
@@ -61,13 +62,12 @@ public class HUDManager : SingleTon<HUDManager>
             elapsed = Time.time - startTime;
             float remainingTime = Mathf.Max(0, duration - elapsed);
 
-            // UI 갱신 (F1: 소수점 한자리)
+            // UI 갱신
             gameStateTimeText.text = remainingTime.ToString("F1");
 
             yield return wait01;
         }
 
-        // 마지막에 확실히 0.0으로 표시
         gameStateTimeText.text = "0.0";
     }
 }

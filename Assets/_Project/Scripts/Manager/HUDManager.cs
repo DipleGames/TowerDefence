@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,14 @@ public class HUDManager : SingleTon<HUDManager>
     [Header("게임 현황 텍스트")]
     public Text gameStateText;
     public Text gameStateTimeText;
+
+    [Header("타워 정보")]
+    public GameObject towerStatePaenl;
+
+    public void SwitchHUD(GameObject ui)
+    {
+        ui.SetActive(!ui.activeSelf);
+    }
 
 
     // 뷰 체인지 버튼 클릭 시 호출

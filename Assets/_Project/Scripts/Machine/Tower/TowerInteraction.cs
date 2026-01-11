@@ -3,13 +3,27 @@ using UnityEngine;
 
 public class TowerInteraction : MonoBehaviour
 {
-    public GameObject uiRoot;
+    public GameObject uiRoot; // 얘는 타워에 붙어있는 객체이기때문에 여기서 관리
     private TowerStateMachine _towerStateMachine;
 
     void Awake()
     {
         _towerStateMachine = GetComponent<TowerStateMachine>();
     }
+
+    void OnMouseEnter()
+    {
+        HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel);
+        ViewManager.Instance.towerView.OnUpdateTowerNameText(gameObject.name);
+        ViewManager.Instance.towerView.StartFuelView(_towerStateMachine);
+    }
+
+    void OnMouseExit()
+    {
+        ViewManager.Instance.towerView.StopFuelView();
+        HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel);
+    }
+
 
     void OnMouseDown()
     {

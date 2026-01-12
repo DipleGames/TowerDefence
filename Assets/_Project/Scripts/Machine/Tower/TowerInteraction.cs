@@ -16,12 +16,14 @@ public class TowerInteraction : MonoBehaviour
         HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel);
         ViewManager.Instance.towerView.OnUpdateTowerNameText(gameObject.name);
         ViewManager.Instance.towerView.StartFuelView(_towerStateMachine);
+        ViewManager.Instance.towerView.StartPowerView(_towerStateMachine);
     }
 
     void OnMouseExit()
     {
-        ViewManager.Instance.towerView.StopFuelView();
         HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel);
+        ViewManager.Instance.towerView.StopFuelView();
+        ViewManager.Instance.towerView.StopPowerView();
     }
 
 

@@ -1,6 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
-
+using System.Collections;
 public class TowerStateMachine : Machine
 {
     [Header("타워 상태")]
@@ -10,25 +9,75 @@ public class TowerStateMachine : Machine
 
     void Start()
     {
-        ApplyTowerState();
+        // 처음 시작 시 상태 설정
+        ChangeTowerState(MachineState.Active);
+        
+        // 상태 감시 로직 시작
+        StartCoroutine(MonitorTowerConditions());
     }
 
-    void Update()
+    // 1. 비활성화/활성화 판정 로직
+    IEnumerator MonitorTowerConditions()
     {
-        if(towerState == MachineState.Active)
-        {
-            activeTime += Time.deltaTime;
+        float powerCheckTick = 0f;
 
-            if(activeTime >= maxActiveTime)
+        while (true)
+        {
+            // 연료 체크 
+            if (towerState == MachineState.Active)
             {
-                ChangeTowerState(MachineState.InActive);  
-                activeTime = 0f;
+                currFuelCapacity -= Time.deltaTime;
+                if (currFuelCapacity <= 0)
+                {
+                    isFuelShortage = true;
+                }
+            }
+
+            // 전원 체크 (5초마다 한 번) ---
+            powerCheckTick += Time.deltaTime;
+            if (powerCheckTick >= 5f)
+            {
+                if (towerState == MachineState.Active)
+                {
+                    int ran = Random.Range(0, 100);
+                    if (ran < possibilityOfPowerDown)
+                    {
+                        isPowerDown = true;
+                    }
+                }
+                powerCheckTick = 0f;
+            }
+
+            // --- 상태 전환 판정 ---
+            StateTransitionDecision();
+
+            yield return null; // 프레임 지연 (Update처럼 동작)
+        }
+    }
+
+    void StateTransitionDecision()
+    {
+        if (isFuelShortage || isPowerDown)
+        {
+            if (towerState != MachineState.InActive)
+            {
+                ChangeTowerState(MachineState.InActive);
+            } 
+        }
+        else
+        {
+            if (towerState != MachineState.Active)
+            {
+
+                ChangeTowerState(MachineState.Active);
             } 
         }
     }
 
-    void ApplyTowerState()
+    public void ChangeTowerState(MachineState towerState)
     {
+        this.towerState = towerState;
+        
         switch(towerState)
         {
             case MachineState.Active:
@@ -38,12 +87,6 @@ public class TowerStateMachine : Machine
                 ApplyInActiveState();
                 break;
         }
-    }
-
-    public void ChangeTowerState(MachineState towerState)
-    {
-        this.towerState = towerState;
-        ApplyTowerState();
     }
 
     public override void ApplyActiveState()

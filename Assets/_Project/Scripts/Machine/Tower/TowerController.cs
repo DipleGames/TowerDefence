@@ -15,7 +15,7 @@ public class TowerController : MonoBehaviour, IAttackable
     void InitTower()
     {
         detectSensor.radius = towerModel.detectRange;
-        towerStateMachine.activeTime = 0f;
+        towerStateMachine.currFuelCapacity = towerStateMachine.maxFuelCapacity;
     }
 
     void OnTriggerEnter(Collider other)

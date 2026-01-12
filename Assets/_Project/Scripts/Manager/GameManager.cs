@@ -26,7 +26,7 @@ public class GameManager : SingleTon<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        OnChangedGameState += HUDManager.Instance.OnChangeGameStateText;
+        OnChangedGameState += HUDManager.Instance.OnChangeGameState;
     }
 
     private void Start()
@@ -95,6 +95,7 @@ public class GameManager : SingleTon<GameManager>
     // -----------------------------
     // Core Loop
     // -----------------------------
+    public bool isReady = false;
     private IEnumerator GameLoopCoroutine()
     {
         while (true)
@@ -106,6 +107,7 @@ public class GameManager : SingleTon<GameManager>
             // 1) Wave
             gameState = GameState.Wave;
             currWave += 1;
+            isReady = false;
             OnChangedGameState.Invoke(gameState);
             StartStateRoutine(WaveCoroutine());
             StartTimerRoutine(HUDManager.Instance.StartTimer(waveTime)); 
@@ -121,10 +123,15 @@ public class GameManager : SingleTon<GameManager>
             OnChangedGameState.Invoke(gameState);
             StartStateRoutine(PrepareCoroutine());
             StartTimerRoutine(HUDManager.Instance.StartTimer(prepareTime));
-            yield return new WaitForSeconds(prepareTime);
+            yield return new WaitUntil(() => isReady == true);
             StopStateRoutine();
             StopTimerRoutine();
         }
+    }
+
+    public void Ready()
+    {
+        isReady = true;
     }
 
     private void StartStateRoutine(IEnumerator routine)
@@ -174,8 +181,14 @@ public class GameManager : SingleTon<GameManager>
 
     private IEnumerator PrepareCoroutine()
     {
+        float _tick = 0f;
         while (gameState == GameState.Prepare)
         {
+            _tick += Time.deltaTime;
+            if(_tick > prepareTime)
+            {
+                isReady = true;
+            }
             yield return null;
         }
     }

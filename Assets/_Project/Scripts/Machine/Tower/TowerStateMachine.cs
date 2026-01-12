@@ -13,6 +13,20 @@ public class TowerStateMachine : Machine
         ApplyTowerState();
     }
 
+    void Update()
+    {
+        if(towerState == MachineState.Active)
+        {
+            activeTime += Time.deltaTime;
+
+            if(activeTime >= maxActiveTime)
+            {
+                ChangeTowerState(MachineState.InActive);  
+                activeTime = 0f;
+            } 
+        }
+    }
+
     void ApplyTowerState()
     {
         switch(towerState)

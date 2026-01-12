@@ -12,20 +12,6 @@ public class TowerController : MonoBehaviour, IAttackable
         InitTower();
     }
 
-    void Update()
-    {
-        if(towerStateMachine.towerState == MachineState.Active)
-        {
-            towerStateMachine.activeTime += Time.deltaTime;
-
-            if(towerStateMachine.activeTime >= towerStateMachine.maxActiveTime)
-            {
-                towerStateMachine.ChangeTowerState(MachineState.InActive);  
-                towerStateMachine.activeTime = 0f;
-            } 
-        }
-    }
-
     void InitTower()
     {
         detectSensor.radius = towerModel.detectRange;

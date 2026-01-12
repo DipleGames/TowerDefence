@@ -12,9 +12,10 @@ public class HUDManager : SingleTon<HUDManager>
     [Header("골드 현황 텍스트")]
     public Text currGoldText;
 
-    [Header("게임 현황 텍스트")]
+    [Header("게임 진행 관련 UI")]
     public Text gameStateText;
     public Text gameStateTimeText;
+    public GameObject skipBtn;
 
     [Header("타워 정보")]
     public GameObject towerStatePaenl;
@@ -46,15 +47,17 @@ public class HUDManager : SingleTon<HUDManager>
     }
 
     // 게임 상태가 바뀔 시 호출
-    public void OnChangeGameStateText(GameState gameState)
+    public void OnChangeGameState(GameState gameState)
     {
         switch(gameState)
         {
             case GameState.Wave:
                 gameStateText.text = $"{gameState} {GameManager.Instance.currWave}";
+                skipBtn.SetActive(false);
                 break;
             case GameState.Prepare:
                 gameStateText.text = $"{gameState}";
+                skipBtn.SetActive(true);
                 break;
         }
     }

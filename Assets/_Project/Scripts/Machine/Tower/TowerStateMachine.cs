@@ -57,14 +57,14 @@ public class TowerStateMachine : Machine
 
     void StateTransitionDecision()
     {
-        if (isFuelShortage || isPowerDown)
+        if (isFuelShortage || isPowerDown) // 만약 연료가 부족하거나 파워가 다운되면
         {
             if (towerState != MachineState.InActive)
             {
                 ChangeTowerState(MachineState.InActive);
             } 
         }
-        else
+        else // 연료도 부족하지않고 파워도 다운되지않았다면
         {
             if (towerState != MachineState.Active)
             {

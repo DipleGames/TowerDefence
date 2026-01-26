@@ -19,34 +19,13 @@ public class TowerStateMachine : Machine
     // 1. 비활성화/활성화 판정 로직
     IEnumerator MonitorTowerConditions()
     {
-        float powerCheckTick = 0f;
-
         while (true)
         {
-            // 연료 체크 
-            if (towerState == MachineState.Active)
-            {
-                currFuelCapacity -= Time.deltaTime;
-                if (currFuelCapacity <= 0)
-                {
-                    isFuelShortage = true;
-                }
-            }
+            // 연료 소비
+            towerController.ConsumeFuel();
 
             // 전원 체크 (5초마다 한 번) ---
-            powerCheckTick += Time.deltaTime;
-            if (powerCheckTick >= 5f)
-            {
-                if (towerState == MachineState.Active)
-                {
-                    int ran = Random.Range(0, 100);
-                    if (ran < possibilityOfPowerDown)
-                    {
-                        isPowerDown = true;
-                    }
-                }
-                powerCheckTick = 0f;
-            }
+            towerController.CheckPower();
 
             // --- 상태 전환 판정 ---
             StateTransitionDecision();

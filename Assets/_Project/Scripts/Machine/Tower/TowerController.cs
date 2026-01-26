@@ -36,6 +36,42 @@ public class TowerController : MonoBehaviour, IAttackable
         }
     }
 
+    /// <summary>
+    /// 연료 소비
+    /// </summary>
+    public void ConsumeFuel()
+    {
+        if (towerStateMachine.towerState == MachineState.Active)
+        {
+            towerStateMachine.currFuelCapacity -= Time.deltaTime;
+            if (towerStateMachine.currFuelCapacity <= 0)
+            {
+                towerStateMachine.isFuelShortage = true;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 파워 체크
+    /// </summary>
+    float powerCheckTick = 0f;
+    public void CheckPower()
+    {
+        powerCheckTick += Time.deltaTime;
+        if (powerCheckTick >= 5f)
+        {
+            if (towerStateMachine.towerState == MachineState.Active)
+            {
+                int ran = Random.Range(0, 100);
+                if (ran < towerStateMachine.possibilityOfPowerDown)
+                {
+                    towerStateMachine.isPowerDown = true;
+                }
+            }
+            powerCheckTick = 0f;
+        }
+    }
+
     public IEnumerator AttackRoutine()
     {
         while(towerStateMachine.towerState == MachineState.Active)

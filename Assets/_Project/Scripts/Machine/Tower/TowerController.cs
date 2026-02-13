@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class TowerController : MonoBehaviour, IAttackable
 {
+    [Header("실제 타겟")]
+    public MonsterController targetMC; 
+
     public TowerModel towerModel;
     public TowerStateMachine towerStateMachine;
+    public Cannon cannon;
     public SphereCollider detectSensor;
 
     void Awake()
@@ -20,12 +24,17 @@ public class TowerController : MonoBehaviour, IAttackable
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Monster"))
+        if (other.CompareTag("Monster"))
         {
             MonsterController monsterController = other.GetComponentInParent<MonsterController>();
-            towerModel.monsters.Add(monsterController);
+
+            if (monsterController != null && !towerModel.monsters.Contains(monsterController))
+            {
+                towerModel.monsters.Add(monsterController);
+            }
         }
     }
+
 
     void OnTriggerExit(Collider other)
     {
@@ -74,15 +83,52 @@ public class TowerController : MonoBehaviour, IAttackable
 
     public IEnumerator AttackRoutine()
     {
-        while(towerStateMachine.towerState == MachineState.Active)
+        while (towerStateMachine.towerState == MachineState.Active)
         {
-            foreach(var monster in towerModel.monsters)
+            MonsterController target = GetClosestMonster();
+            targetMC = target;
+
+            if (targetMC != null)
             {
-                monster.TakeDamage(towerModel.attackDamage);
+                cannon.SetTarget(targetMC.transform);
+                targetMC.TakeDamage(towerModel.attackDamage);
             }
-            
+            else
+            {
+                cannon.ClearTarget();
+            }
+
             yield return new WaitForSeconds(towerModel.attackDelay);
         }
-        yield break;
     }
+
+
+    private MonsterController GetClosestMonster()
+    {
+        MonsterController closest = null;
+        float minDistSqr = float.MaxValue;
+
+        for (int i = towerModel.monsters.Count - 1; i >= 0; i--)
+        {
+            MonsterController m = towerModel.monsters[i];
+
+            // 이미 죽었거나 파괴된 몬스터 정리
+            if (m == null || !m.gameObject.activeInHierarchy)
+            {
+                towerModel.monsters.RemoveAt(i);
+                continue;
+            }
+
+            float distSqr = (m.transform.position - transform.position).sqrMagnitude;
+
+            if (distSqr < minDistSqr)
+            {
+                minDistSqr = distSqr;
+                closest = m;
+            }
+        }
+
+        return closest;
+    }
+
 }

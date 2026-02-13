@@ -7,6 +7,8 @@ public class GoldManager : SingleTon<GoldManager>
     [SerializeField] private int _currGold;
     public event Action<int> OnChangedGold;
 
+    public bool canBuy = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -33,5 +35,18 @@ public class GoldManager : SingleTon<GoldManager>
     {
         CurrGold -= amount;
         OnChangedGold.Invoke(CurrGold);
+    }
+
+    public void TryBuy(int currGold, int amount)
+    {
+        if(currGold > amount)
+        {
+            canBuy = true;
+            SubtractGold(amount);
+        }
+        else
+        {
+            canBuy = false;
+        }
     }
 }

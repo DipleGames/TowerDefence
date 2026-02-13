@@ -7,10 +7,9 @@ public class WayPointManager : MonoBehaviour
 
     void Awake()
     {
-        GameObject wayPointGroups = GameObject.Find("WayPointBundle");
         for(int i=0; i<8; i++)
         {
-            wayPoints.Add(wayPointGroups.transform.GetChild(i).transform);
+            wayPoints.Add(gameObject.transform.GetChild(i).transform);
         }
     }
 }

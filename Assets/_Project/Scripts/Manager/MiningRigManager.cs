@@ -15,32 +15,33 @@ public class MiningRigManager : MonoBehaviour
     [SerializeField] private GameObject miningRig;
 
 
-    [Header("업그레이드 현황")]
+    [Header("업그레이드 관련")]
     [SerializeField] private int expandCount = 0;
     [SerializeField] private int additionCount = 0;
+    [SerializeField] private int expandCost = 100;
+    [SerializeField] private int additionCost = 50;
 
-    void Update()
+    void Awake()
     {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            ExpandField();
-        }
-
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            AddOnMiningRig();
-        }
+        ViewManager.Instance.miningRigView.expandFieldBtn.onClick.AddListener(ExpandField);
+        ViewManager.Instance.miningRigView.addOnMiningRigBtn.onClick.AddListener(AddOnMiningRig);
     }
+
+
     public void ExpandField()
     {
         expandCount++;
-
+        GoldManager.Instance.TryBuy(GoldManager.Instance.CurrGold, expandCost);
+        if(!GoldManager.Instance.canBuy) return;
+        
         expandFields[expandCount].SetActive(true);
     }
 
     public void AddOnMiningRig()
     {
         additionCount++;
+        GoldManager.Instance.TryBuy(GoldManager.Instance.CurrGold, additionCost);
+        if(!GoldManager.Instance.canBuy) return;
 
         Transform parent = miningRigsFloor.transform;
         if (additionCount >= parent.childCount) return;

@@ -91,7 +91,7 @@ public class TowerController : MonoBehaviour, IAttackable
             if (targetMC != null)
             {
                 cannon.SetTarget(targetMC.transform);
-                targetMC.TakeDamage(towerModel.attackDamage);
+                cannon.Shot();
             }
             else
             {

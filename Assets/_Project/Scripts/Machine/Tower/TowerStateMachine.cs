@@ -70,13 +70,23 @@ public class TowerStateMachine : Machine
 
     public override void ApplyActiveState()
     {
-        GetComponentInChildren<MeshRenderer>().material = Mat_Active;
+        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
+
+        foreach(var mr in meshRenderers)
+        {
+            mr.material = Mat_Active;
+        }
         StartCoroutine(towerController.AttackRoutine());
     }
 
     public override void ApplyInActiveState()
     {
-        GetComponentInChildren<MeshRenderer>().material = Mat_InActive;
+        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
+
+        foreach(var mr in meshRenderers)
+        {
+            mr.material = Mat_InActive;
+        }
         Debug.Log("타워가 비활성화 됐습니다.");
     }
 }

@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     public void InitProj(Transform target, float damage)
     {
         _target = target;
-        _projSpeed = 10f;
+        _projSpeed = 15f;
         _damage = damage;
         _isInit = true;
     }
@@ -19,7 +19,11 @@ public class Projectile : MonoBehaviour
     {
         if(!_isInit) return;
 
-        if(_target == null) Destroy(gameObject);
+        if(_target == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         transform.position += (_target.position - transform.position).normalized * _projSpeed * Time.deltaTime;
     }
 

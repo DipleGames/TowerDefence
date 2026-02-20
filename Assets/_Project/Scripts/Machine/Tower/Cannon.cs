@@ -4,7 +4,8 @@ using System.Collections;
 public class Cannon : MonoBehaviour
 {
     [SerializeField] private Transform _cannon;
-    [SerializeField] private Projectile _proj;  
+    [SerializeField] private Projectile _proj;
+    [SerializeField] private float _damage = 10f;  
 
     private Transform _currentTarget;
 
@@ -21,8 +22,10 @@ public class Cannon : MonoBehaviour
 
     public void Shot()
     {
-        Projectile proj = Instantiate(_proj, _cannon.transform.position, Quaternion.identity);
-        proj.InitProj(_currentTarget, 10f);
+        Projectile proj = PoolManager.Instance.GetProj(); // 풀에서 총알 가져와서
+ 
+        proj.gameObject.transform.position = transform.position; // 위치를 캐논으로 지정시키고
+        proj.InitProj(_currentTarget, _damage); // 정보를 초기화
     }
   
 }

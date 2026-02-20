@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
         if(other.CompareTag("Monster"))
         {
             other.GetComponentInParent<MonsterController>().TakeDamage(_damage);
-            Destroy(gameObject);
+            PoolManager.Instance.ReturnProj(this);
         }
     }
 }

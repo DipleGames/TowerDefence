@@ -43,7 +43,7 @@ public class MonsterStateMachine : MonoBehaviour
 
     void MoveToCurrentWayPoint()
     {
-        _agent.SetDestination(WayPointManager.wayPoints[_currentWayPointIndex].transform.position);
+        _agent.SetDestination(WayPointManager.Instance.wayPoints[_currentWayPointIndex].transform.position);
     }
 
     void MoveToNextWayPoint()
@@ -51,7 +51,7 @@ public class MonsterStateMachine : MonoBehaviour
         _currentWayPointIndex++;
 
         //순환 (0 ~ Count-1)
-        if (_currentWayPointIndex >= WayPointManager.wayPoints.Count)
+        if (_currentWayPointIndex >= WayPointManager.Instance.wayPoints.Count)
         {
             _currentWayPointIndex = 0;
         }

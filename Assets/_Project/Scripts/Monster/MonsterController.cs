@@ -9,12 +9,12 @@ public class MonsterController : MonoBehaviour, IDamageable
     void Awake()
     {
         InitMonster();
-        ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);
     }
 
     public void InitMonster()
     {
         monsterModel.CurrentHP = monsterModel.maxHP;
+        ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);
     }
 
 

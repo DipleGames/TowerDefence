@@ -181,6 +181,8 @@ public class GameManager : SingleTon<GameManager>
 
     private IEnumerator PrepareCoroutine()
     {
+        StartCoroutine(AugmentManager.Instance.AugmentPhase(prepareTime));
+
         float _tick = 0f;
         while (gameState == GameState.Prepare)
         {

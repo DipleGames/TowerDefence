@@ -62,4 +62,8 @@ public class TowerManager : SingleTon<TowerManager>
         towerStateMachine.isPowerDown = false;
         yield break;
     }
+
+    #region upgrade
+    
+    #endregion
 }

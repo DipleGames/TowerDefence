@@ -248,10 +248,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PowerRepair
+  m_text: "\uD30C\uC6CC \uC218\uB9AC"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 68283e3fcdca09f41adb005c89b80d26, type: 2}
+  m_sharedMaterial: {fileID: -3220251892995759781, guid: 68283e3fcdca09f41adb005c89b80d26, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1032,10 +1032,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FuelSupply
+  m_text: "\uC5F0\uB8CC \uACF5\uAE09"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 68283e3fcdca09f41adb005c89b80d26, type: 2}
+  m_sharedMaterial: {fileID: -3220251892995759781, guid: 68283e3fcdca09f41adb005c89b80d26, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1290,6 +1290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cannon: {fileID: 6814314219264989574}
   _proj: {fileID: -2195039687356124586, guid: 6681bc4db20443141bfc6ac2152f0894, type: 3}
+  _damage: 10
 --- !u!1 &6462305993241072619
 GameObject:
   m_ObjectHideFlags: 0

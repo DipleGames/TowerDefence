@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Augment : MonoBehaviour
 {
     public Button button;
-    public Text nameText;
-    public Text descText;
+    public TMP_Text nameText;
+    public TMP_Text descText;
 
     public AugmentData augment;
 

@@ -20,9 +20,9 @@ public class HUDManager : SingleTon<HUDManager>
     [Header("타워 정보")]
     public GameObject towerStatePaenl;
 
-    public void SwitchHUD(GameObject ui)
+    public void SwitchHUD(GameObject ui, bool b)
     {
-        ui.SetActive(!ui.activeSelf);
+        ui.SetActive(b);
     }
 
 

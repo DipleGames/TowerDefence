@@ -14,7 +14,7 @@ public class TowerInteraction : MonoBehaviour
     {
         if(ViewManager.Instance.augmentView.isAugmentUIActive) return;
 
-        HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel);
+        HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel, true);
         ViewManager.Instance.towerView.OnUpdateTowerNameText(gameObject.name);
         ViewManager.Instance.towerView.StartFuelView(_towerStateMachine);
         ViewManager.Instance.towerView.StartPowerView(_towerStateMachine);
@@ -24,7 +24,7 @@ public class TowerInteraction : MonoBehaviour
     {
         if(ViewManager.Instance.augmentView.isAugmentUIActive) return;
 
-        HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel);
+        HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel, false);
         ViewManager.Instance.towerView.StopFuelView();
         ViewManager.Instance.towerView.StopPowerView();
     }

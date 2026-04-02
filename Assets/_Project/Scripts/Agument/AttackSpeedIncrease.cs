@@ -11,7 +11,7 @@ public class AttackSpeedIncrease : AugmentData
         foreach (var t in TowerManager.Instance.towerList)
         {
             var model = t.towerController.towerModel;
-            model.attackDelay *= increaseRate;
+            model.attackSpeed *= increaseRate;
         }
         yield break;
     }

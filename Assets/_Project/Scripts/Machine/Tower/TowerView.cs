@@ -7,10 +7,16 @@ public class TowerView : MonoBehaviour
 {
     public GameObject towerStatePanel;
     public Text towerNameText;
+
+    [Header("상태 관련")]
     public Text towerRemainFuelText;
     public Text towerPowerText;
 
-    public void OnUpdateTowerNameText(string towerName)
+    [Header("스텟 관련")]
+    public Text towerAttackPowerText;
+    public Text towerAttackSpeedText;
+
+    public void UpdateTowerNameText(string towerName)
     {
         towerNameText.text = towerName;
     }
@@ -87,6 +93,14 @@ public class TowerView : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+    }
+    #endregion
+
+    #region 스탯 관련
+    public void UpdateTowerStatText(TowerStateMachine towerStateMachine)
+    {
+        towerAttackPowerText.text = $"공격력 : {towerStateMachine.towerController.towerModel.attackPower}";
+        towerAttackSpeedText.text = $"공격속도 : {towerStateMachine.towerController.towerModel.attackSpeed}";
     }
     #endregion
 }

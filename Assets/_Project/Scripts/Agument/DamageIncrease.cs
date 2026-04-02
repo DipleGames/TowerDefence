@@ -11,7 +11,7 @@ public class DamageIncrease : AugmentData
         foreach (var t in TowerManager.Instance.towerList)
         {
             var model = t.towerController.towerModel;
-            model.attackDamage += model.attackDamage * increaseRate;
+            model.attackPower += model.attackPower * increaseRate;
         }
         yield break;
     }

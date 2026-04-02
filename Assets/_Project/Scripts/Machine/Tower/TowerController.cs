@@ -98,7 +98,7 @@ public class TowerController : MonoBehaviour, IAttackable
                 cannon.ClearTarget();
             }
 
-            yield return new WaitForSeconds(towerModel.attackDelay);
+            yield return new WaitForSeconds(towerModel.attackSpeed);
         }
     }
 

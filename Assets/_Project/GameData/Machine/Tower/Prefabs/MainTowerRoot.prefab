@@ -667,10 +667,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectRange: 8
-  attackDamage: 10
-  attackDelay: 0.5
-  fuelSupplyRequiredCost: 0
-  repairPowerRequiredCost: 0
+  attackPower: 20
+  attackSpeed: 1
+  fuelSupplyRequiredCost: 30
+  repairPowerRequiredCost: 30
   monsters: []
 --- !u!114 &4289968243516913745
 MonoBehaviour:

@@ -71,7 +71,7 @@ public class TowerController : MonoBehaviour, IAttackable
         {
             if (towerStateMachine.towerState == MachineState.Active)
             {
-                int ran = Random.Range(0, 100);
+                float ran = Random.Range(0f, 100f);
                 if (ran < towerStateMachine.possibilityOfPowerDown)
                 {
                     towerStateMachine.isPowerDown = true;

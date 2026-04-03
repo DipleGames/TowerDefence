@@ -9,6 +9,7 @@ public class TowerView : MonoBehaviour
     public Text towerNameText;
 
     [Header("상태 관련")]
+    public Text possibilityOfPowerDownText;
     public Text towerRemainFuelText;
     public Text towerPowerText;
 
@@ -94,9 +95,14 @@ public class TowerView : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+
+    public void UpdatePossibilityOfPowerDownTextt(TowerStateMachine towerStateMachine)
+    {
+        possibilityOfPowerDownText.text = $"전력 차단 확률 : {towerStateMachine.possibilityOfPowerDown}%";
+    }
     #endregion
 
-    #region 스탯 관련
+    #region 스탯 관련 메서드
     public void UpdateTowerStatText(TowerStateMachine towerStateMachine)
     {
         towerAttackPowerText.text = $"공격력 : {towerStateMachine.towerController.towerModel.attackPower}";

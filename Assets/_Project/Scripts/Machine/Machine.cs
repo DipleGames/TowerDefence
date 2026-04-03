@@ -10,7 +10,7 @@ public abstract class Machine : MonoBehaviour
     public float currFuelCapacity;
 
     [Header("파워 차단 관련")]
-    public int possibilityOfPowerDown;
+    public float possibilityOfPowerDown;
 
     [Header("고장 상태")]
     public bool isFuelShortage = false;

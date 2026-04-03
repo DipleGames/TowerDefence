@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151514eafabe6aa4ab35ca1961c56c12, type: 3}
+  m_Name: ReducedPowerOutageChance
+  m_EditorClassIdentifier: 
+  augmentName: "\uC804\uB825 \uCC28\uB2E8 \uD655\uB960 \uAC10\uC18C"
+  augmentDesc: "\uC804\uB825 \uCC28\uB2E8\uC73C\uB85C \uC778\uD574 \uC804\uC6D0 \uACE0\uC7A5\uC774
+    \uB0A0 \uD655\uB960\uC774 0.1%\uB9CC\uD07C \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  increaseRate: 0.1

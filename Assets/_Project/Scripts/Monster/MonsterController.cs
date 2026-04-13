@@ -5,10 +5,21 @@ public class MonsterController : MonoBehaviour, IDamageable
 {
     [SerializeField] private Slider _slider;
     public MonsterModel monsterModel;
+    private Quaternion _initialRotation;
 
     void Awake()
     {
         InitMonster();
+    }
+
+    private void Start()
+    {
+        _initialRotation = _slider.transform.rotation;
+    }
+
+    private void LateUpdate()
+    {
+        _slider.transform.rotation = _initialRotation;
     }
 
     public void InitMonster()

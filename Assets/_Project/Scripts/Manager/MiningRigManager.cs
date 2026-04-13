@@ -27,21 +27,27 @@ public class MiningRigManager : MonoBehaviour
         ViewManager.Instance.miningRigView.addOnMiningRigBtn.onClick.AddListener(AddOnMiningRig);
     }
 
+    void Start()
+    {
+        ViewManager.Instance.miningRigView.UpdateExpandCostText(expandCost);
+        ViewManager.Instance.miningRigView.UpdateAdditionCostText(additionCost);
+    }
+
 
     public void ExpandField()
     {
+        if(!GoldManager.Instance.TryBuy(GoldManager.Instance.CurrGold, expandCost)) return;
         expandCount++;
-        GoldManager.Instance.TryBuy(GoldManager.Instance.CurrGold, expandCost);
-        if(!GoldManager.Instance.canBuy) return;
-        
+        expandCost += 100;
+        ViewManager.Instance.miningRigView.UpdateExpandCostText(expandCost);
+
         expandFields[expandCount].SetActive(true);
     }
 
     public void AddOnMiningRig()
     {
+        if(!GoldManager.Instance.TryBuy(GoldManager.Instance.CurrGold, additionCost)) return;
         additionCount++;
-        GoldManager.Instance.TryBuy(GoldManager.Instance.CurrGold, additionCost);
-        if(!GoldManager.Instance.canBuy) return;
 
         Transform parent = miningRigsFloor.transform;
         if (additionCount >= parent.childCount) return;

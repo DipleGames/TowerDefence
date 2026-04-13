@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbab60b41c1df1e4eb8e7d8270e9fcbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  output: 5
+  output: 20
   leadTime: 3
 --- !u!114 &7495266847733363089
 MonoBehaviour:
@@ -206,8 +206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093a80ec8b2ee714f807565be2ac46d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxActiveTime: 60
-  activeTime: 0
+  maxFuelCapacity: 0
+  currFuelCapacity: 0
+  possibilityOfPowerDown: 0
+  isFuelShortage: 0
+  isPowerDown: 0
   Mat_Active: {fileID: 2100000, guid: 747e0f253bd6a8c4f9746fe0d75fdba5, type: 2}
   Mat_InActive: {fileID: 2100000, guid: 9eeee52ff0e12ee439a9bc0d7fbd3aa2, type: 2}
   miningRigState: 0

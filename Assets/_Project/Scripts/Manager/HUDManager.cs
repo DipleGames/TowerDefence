@@ -34,10 +34,12 @@ public class HUDManager : SingleTon<HUDManager>
             case GirdView.Main:
                 viewChangeBtn.GetComponentInChildren<Text>().text = "채굴장";
                 ViewManager.Instance.miningRigView.miningPanel.SetActive(false);
+                ViewManager.Instance.towerView.mainPanel.SetActive(true);
                 break;
             case GirdView.Mining:
                 viewChangeBtn.GetComponentInChildren<Text>().text = "메인";
                 ViewManager.Instance.miningRigView.miningPanel.SetActive(true);
+                ViewManager.Instance.towerView.mainPanel.SetActive(false);
                 break;
         }
     }

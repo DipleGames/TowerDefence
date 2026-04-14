@@ -2,25 +2,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System;
+using TMPro;
 
 public class TowerView : MonoBehaviour
 {
+    public GameObject mainPanel;
     public GameObject towerStatePanel;
-    public Text towerNameText;
+
+    [Header("수리 비용 Text")]
+    public TextMeshProUGUI fuelSupplyCostText;
+    public TextMeshProUGUI repairPowerCostText;
 
     [Header("상태 관련")]
     public Text possibilityOfPowerDownText;
     public Text towerRemainFuelText;
     public Text towerPowerText;
 
+
     [Header("스텟 관련")]
     public Text towerAttackPowerText;
     public Text towerAttackSpeedText;
-
-    public void UpdateTowerNameText(string towerName)
-    {
-        towerNameText.text = towerName;
-    }
 
     #region 연료 관련 메서드
     Coroutine fuelCoroutine;
@@ -96,7 +97,7 @@ public class TowerView : MonoBehaviour
         }
     }
 
-    public void UpdatePossibilityOfPowerDownTextt(TowerStateMachine towerStateMachine)
+    public void UpdatePossibilityOfPowerDownText(TowerStateMachine towerStateMachine)
     {
         possibilityOfPowerDownText.text = $"전력 차단 확률 : {towerStateMachine.possibilityOfPowerDown}%";
     }
@@ -107,6 +108,35 @@ public class TowerView : MonoBehaviour
     {
         towerAttackPowerText.text = $"공격력 : {towerStateMachine.towerController.towerModel.attackPower}";
         towerAttackSpeedText.text = $"공격속도 : {towerStateMachine.towerController.towerModel.attackSpeed}";
+    }
+    #endregion
+
+    #region 수리 버튼 관련 메서드
+    public void UpdateFuelSupplyCostText()
+    {
+        int cost = 0;
+        foreach(TowerStateMachine tower in TowerManager.Instance.towerList)
+        {
+            if(tower.isFuelShortage)
+            {
+                cost += tower.towerController.towerModel.fuelSupplyRequiredCost;
+            }
+        }
+        fuelSupplyCostText.text = $"{cost}";
+
+    }
+
+    public void UpdateRepairPowerCostText()
+    {
+        int cost = 0;
+        foreach(TowerStateMachine tower in TowerManager.Instance.towerList)
+        {
+            if(tower.isPowerDown)
+            {
+                cost += tower.towerController.towerModel.repairPowerRequiredCost;
+            }
+        }
+        repairPowerCostText.text = $"{cost}";
     }
     #endregion
 }

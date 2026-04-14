@@ -1,14 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 public class TowerManager : SingleTon<TowerManager>
 {
     public List<TowerStateMachine> towerList = new();
+    
 
     void Start()
     {
         UpdateTowerList();
+
+        ViewManager.Instance.towerView.UpdateFuelSupplyCostText();
+        ViewManager.Instance.towerView.UpdateRepairPowerCostText();
     }
 
     public void UpdateTowerList()
@@ -32,6 +37,17 @@ public class TowerManager : SingleTon<TowerManager>
         StartCoroutine(FuelSupply(towerStateMachine, towerModel));
     }
 
+    public void TryAllFuelSupply()
+    {
+        foreach(TowerStateMachine tower in towerList)
+        {
+            if(tower.isFuelShortage)
+            {
+                StartCoroutine(FuelSupply(tower, tower.towerController.towerModel));
+            }
+        }
+    }
+
     public IEnumerator FuelSupply(TowerStateMachine towerStateMachine, TowerModel towerModel)
     {
         if(GoldManager.Instance.CurrGold < towerModel.fuelSupplyRequiredCost) yield break;
@@ -41,6 +57,7 @@ public class TowerManager : SingleTon<TowerManager>
         yield return new WaitForSeconds(2f);
         towerStateMachine.currFuelCapacity = towerStateMachine.maxFuelCapacity;
         towerStateMachine.isFuelShortage = false;
+        ViewManager.Instance.towerView.UpdateFuelSupplyCostText();
         yield break;
     }
 
@@ -52,6 +69,17 @@ public class TowerManager : SingleTon<TowerManager>
         StartCoroutine(RepairPower(towerStateMachine, towerModel));
     }
 
+    public void TryAllRepairPower()
+    {
+        foreach(TowerStateMachine tower in towerList)
+        {
+            if(tower.isPowerDown)
+            {
+                StartCoroutine(RepairPower(tower, tower.towerController.towerModel));
+            }
+        }
+    }
+
     public IEnumerator RepairPower(TowerStateMachine towerStateMachine, TowerModel towerModel)
     {
         if(GoldManager.Instance.CurrGold < towerModel.repairPowerRequiredCost) yield break;
@@ -60,6 +88,7 @@ public class TowerManager : SingleTon<TowerManager>
         GoldManager.Instance.SubtractGold(towerModel.repairPowerRequiredCost);
         yield return new WaitForSeconds(2f);
         towerStateMachine.isPowerDown = false;
+        ViewManager.Instance.towerView.UpdateRepairPowerCostText();
         yield break;
     }
 

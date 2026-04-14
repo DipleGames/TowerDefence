@@ -56,6 +56,7 @@ public class TowerController : MonoBehaviour, IAttackable
             if (towerStateMachine.currFuelCapacity <= 0)
             {
                 towerStateMachine.isFuelShortage = true;
+                ViewManager.Instance.towerView.UpdateFuelSupplyCostText();
             }
         }
     }
@@ -75,6 +76,7 @@ public class TowerController : MonoBehaviour, IAttackable
                 if (ran < towerStateMachine.possibilityOfPowerDown)
                 {
                     towerStateMachine.isPowerDown = true;
+                    ViewManager.Instance.towerView.UpdateRepairPowerCostText();
                 }
             }
             powerCheckTick = 0f;

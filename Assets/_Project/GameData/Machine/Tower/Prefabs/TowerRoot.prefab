@@ -602,8 +602,8 @@ MonoBehaviour:
   detectRange: 5
   attackPower: 10
   attackSpeed: 1
-  fuelSupplyRequiredCost: 10
-  repairPowerRequiredCost: 10
+  fuelSupplyRequiredCost: 20
+  repairPowerRequiredCost: 20
   monsters: []
 --- !u!114 &2998761206172094858
 MonoBehaviour:

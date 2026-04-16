@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TowerInteraction : MonoBehaviour
 {
-    public GameObject uiRoot; // 얘는 타워에 붙어있는 객체이기때문에 여기서 관리
+    public GameObject uiRoot;
     private TowerStateMachine _towerStateMachine;
 
     void Awake()
@@ -10,12 +10,31 @@ public class TowerInteraction : MonoBehaviour
         _towerStateMachine = GetComponent<TowerStateMachine>();
     }
 
+    void Update()
+    {
+        if (_towerStateMachine == null) return;
+        if (_towerStateMachine.towerState != MachineState.InActive) return;
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.transform == transform || hit.collider.transform.IsChildOf(transform))
+                {
+                    uiRoot.SetActive(!uiRoot.activeSelf);
+                }
+            }
+        }
+    }
+
     void OnMouseEnter()
     {
-        if(ViewManager.Instance.augmentView.isAugmentUIActive) return;
+        if (ViewManager.Instance.augmentView.isAugmentUIActive) return;
 
         HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel, true);
-        //ViewManager.Instance.towerView.UpdateTowerNameText(gameObject.name);
         ViewManager.Instance.towerView.UpdateTowerStatText(_towerStateMachine);
         ViewManager.Instance.towerView.UpdatePossibilityOfPowerDownText(_towerStateMachine);
         ViewManager.Instance.towerView.StartFuelView(_towerStateMachine);
@@ -24,20 +43,10 @@ public class TowerInteraction : MonoBehaviour
 
     void OnMouseExit()
     {
-        if(ViewManager.Instance.augmentView.isAugmentUIActive) return;
+        if (ViewManager.Instance.augmentView.isAugmentUIActive) return;
 
         HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel, false);
         ViewManager.Instance.towerView.StopFuelView();
         ViewManager.Instance.towerView.StopPowerView();
     }
-
-
-    void OnMouseDown()
-    {
-        if(_towerStateMachine.towerState == MachineState.InActive)
-        {
-            uiRoot.SetActive(!uiRoot.activeSelf);
-        }
-    }
-
 }

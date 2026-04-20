@@ -8,10 +8,12 @@ public class AttackSpeedIncrease : AugmentData
 
     public override IEnumerator Execute()
     {
+
+        TowerManager.Instance.AddAttackSpeedBonus(increaseRate);
+
         foreach (var t in TowerManager.Instance.towerList)
         {
-            var model = t.towerController.towerModel;
-            model.attackSpeed *= increaseRate;
+            t.towerController.towerStatCalculator.RecalculateStats(t);
         }
         yield break;
     }

@@ -6,8 +6,12 @@ public class TowerController : MonoBehaviour, IAttackable
     [Header("실제 타겟")]
     public MonsterController targetMC; 
 
+    [Header("타워 컴퍼넌트")]
     public TowerModel towerModel;
     public TowerStateMachine towerStateMachine;
+    public TowerStatCalculator towerStatCalculator;
+
+    [Header("타워 부착물")]
     public Cannon cannon;
     public SphereCollider detectSensor;
 
@@ -19,7 +23,9 @@ public class TowerController : MonoBehaviour, IAttackable
     void InitTower()
     {
         detectSensor.radius = towerModel.detectRange;
-        towerStateMachine.currFuelCapacity = towerStateMachine.maxFuelCapacity;
+        
+        towerStatCalculator.RecalculateStats(towerStateMachine); // 스탯 계산
+        towerStateMachine.currFuelCapacity = towerModel.maxFuelCapacity; // 연료 주입
     }
 
     void OnTriggerEnter(Collider other)
@@ -73,7 +79,7 @@ public class TowerController : MonoBehaviour, IAttackable
             if (towerStateMachine.towerState == MachineState.Active)
             {
                 float ran = Random.Range(0f, 100f);
-                if (ran < towerStateMachine.possibilityOfPowerDown)
+                if (ran < towerStateMachine.currPossibilityOfPowerDown)
                 {
                     towerStateMachine.isPowerDown = true;
                     ViewManager.Instance.towerView.UpdateRepairPowerCostText();

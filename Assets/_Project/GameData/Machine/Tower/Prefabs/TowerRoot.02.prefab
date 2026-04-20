@@ -560,9 +560,10 @@ GameObject:
   - component: {fileID: 2998761206172094858}
   - component: {fileID: 8504811357119620222}
   - component: {fileID: 3640692015049497441}
-  - component: {fileID: 8318301648847720322}
   - component: {fileID: 6875614777086799173}
   - component: {fileID: 1876963195817303695}
+  - component: {fileID: 3490993610624638200}
+  - component: {fileID: 8318301648847720322}
   m_Layer: 0
   m_Name: TowerRoot.02
   m_TagString: Tower
@@ -601,12 +602,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ed970b7e4b13b47b7821f843e51125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerLv: 2
   detectRange: 5
-  attackPower: 45
-  attackSpeed: 1
+  baseAttackPower: 45
+  baseAttackSpeed: 1
+  baseMaxFuelCapacity: 180
+  baseReducedPowerOutageChance: 2
   fuelSupplyRequiredCost: 120
   repairPowerRequiredCost: 120
+  towerLv: 2
+  attackPower: 45
+  attackSpeed: 1
+  maxFuelCapacity: 180
   monsters: []
 --- !u!114 &2998761206172094858
 MonoBehaviour:
@@ -620,9 +626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c8579bf9a974d40a2a068a4cb73333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFuelCapacity: 180
   currFuelCapacity: 0
-  possibilityOfPowerDown: 2
+  currPossibilityOfPowerDown: 0
   isFuelShortage: 0
   isPowerDown: 0
   Mat_Active: {fileID: 2100000, guid: a1ff628e36c7c45478e55d2199d03e4b, type: 2}
@@ -644,6 +649,7 @@ MonoBehaviour:
   targetMC: {fileID: 0}
   towerModel: {fileID: 1622403925965746644}
   towerStateMachine: {fileID: 2998761206172094858}
+  towerStatCalculator: {fileID: 3490993610624638200}
   cannon: {fileID: 72005020294453461}
   detectSensor: {fileID: 1650897778288282893}
 --- !u!114 &3640692015049497441
@@ -659,33 +665,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiRoot: {fileID: 1173384006079773160}
---- !u!54 &8318301648847720322
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1176946102851020595}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
 --- !u!114 &6875614777086799173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,6 +695,45 @@ MonoBehaviour:
     m_Bits: 128
   _colliders: []
   towerMergeSFX: {fileID: 8300000, guid: 34a6454c9796cdb4f8a69c988ccaea24, type: 3}
+--- !u!114 &3490993610624638200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176946102851020595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fa8a1868c460d41b2ddda96e561a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &8318301648847720322
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176946102851020595}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!1 &1622950219868863454
 GameObject:
   m_ObjectHideFlags: 0

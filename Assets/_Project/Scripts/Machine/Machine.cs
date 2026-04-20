@@ -4,13 +4,10 @@ public enum MachineState { Active , InActive }
 
 public abstract class Machine : MonoBehaviour
 {
-
-    [Header("기계 연료 량")]
-    public float maxFuelCapacity;
     public float currFuelCapacity;
 
     [Header("파워 차단 관련")]
-    public float possibilityOfPowerDown;
+    public float currPossibilityOfPowerDown;
 
     [Header("고장 상태")]
     public bool isFuelShortage = false;

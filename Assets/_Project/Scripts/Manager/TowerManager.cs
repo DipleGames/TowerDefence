@@ -8,8 +8,7 @@ public class TowerManager : SingleTon<TowerManager>
     public List<TowerStateMachine> towerList = new();
     public List<GameObject> towerRevolutionList = new();
 
-    
-
+ 
     void Start()
     {
         UpdateTowerList();
@@ -59,7 +58,7 @@ public class TowerManager : SingleTon<TowerManager>
         Debug.Log($"{towerStateMachine}에 연료를 공급하고있습니다..");
         GoldManager.Instance.SubtractGold(towerModel.fuelSupplyRequiredCost);
         yield return new WaitForSeconds(2f);
-        towerStateMachine.currFuelCapacity = towerStateMachine.maxFuelCapacity;
+        towerStateMachine.currFuelCapacity = towerModel.maxFuelCapacity;
         towerStateMachine.isFuelShortage = false;
         ViewManager.Instance.towerView.UpdateFuelSupplyCostText();
         yield break;
@@ -96,7 +95,31 @@ public class TowerManager : SingleTon<TowerManager>
         yield break;
     }
 
-    #region upgrade
+    #region Augment
+    public float AttackPowerRateBonus { get; private set; }
+    public float AttackSpeedMultiplier { get; private set; } = 1f;
+    public float FuelIncreaseRateBonus { get; private set; }
+    public float ReducedPowerOutageChanceRateBonus { get; private set; }
+
+    public void AddAttackPowerBonus(float value)
+    {
+        AttackPowerRateBonus += value;
+    }
+
+    public void AddAttackSpeedBonus(float value)
+    {
+        AttackSpeedMultiplier *= value;
+    }
+
+    public void AddFuelIncreaseBonus(float value)
+    {
+        FuelIncreaseRateBonus += value;
+    }
+
+    public void AddReducedPowerOutageChanceRateBonus(float value)
+    {
+        ReducedPowerOutageChanceRateBonus += value;
+    }
     
     #endregion
 }

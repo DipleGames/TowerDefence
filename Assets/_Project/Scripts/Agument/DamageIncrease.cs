@@ -8,10 +8,11 @@ public class DamageIncrease : AugmentData
 
     public override IEnumerator Execute()
     {
+        TowerManager.Instance.AddAttackPowerBonus(increaseRate);
+
         foreach (var t in TowerManager.Instance.towerList)
         {
-            var model = t.towerController.towerModel;
-            model.attackPower += model.attackPower * increaseRate;
+            t.towerController.towerStatCalculator.RecalculateStats(t);
         }
         yield break;
     }

@@ -8,12 +8,11 @@ public class FuelIncrease : AugmentData
 
     public override IEnumerator Execute()
     {
+        TowerManager.Instance.AddFuelIncreaseBonus(increaseRate);
+
         foreach (var t in TowerManager.Instance.towerList)
         {
-            var towerStateMachine = t.towerController.towerStateMachine;
-            float bouns = towerStateMachine.maxFuelCapacity * 0.1f;
-
-            towerStateMachine.maxFuelCapacity += bouns; // 연료량 10% 증가
+            t.towerController.towerStatCalculator.RecalculateStats(t);
         }
         yield break;
     }

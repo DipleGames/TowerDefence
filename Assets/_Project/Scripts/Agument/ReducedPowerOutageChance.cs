@@ -8,10 +8,11 @@ public class ReducedPowerOutageChance : AugmentData
 
     public override IEnumerator Execute()
     {
+        TowerManager.Instance.AddReducedPowerOutageChanceRateBonus(increaseRate);
+
         foreach (var t in TowerManager.Instance.towerList)
         {
-            var towerStateMachine = t.towerController.towerStateMachine;      
-            towerStateMachine.possibilityOfPowerDown -= 0.1f; // 확률 0.1% 감소
+            t.towerController.towerStatCalculator.RecalculateStats(t);
         }
         yield break;
     }

@@ -20,6 +20,7 @@ public class TowerView : MonoBehaviour
 
 
     [Header("스텟 관련")]
+    public Text towerLevelText;
     public Text towerAttackPowerText;
     public Text towerAttackSpeedText;
 
@@ -47,7 +48,7 @@ public class TowerView : MonoBehaviour
         while (!towerStateMachine.isFuelShortage)
         {
             float remainTime = towerStateMachine.currFuelCapacity;
-            float percent = (remainTime / towerStateMachine.maxFuelCapacity) * 100f;
+            float percent = (remainTime / towerStateMachine.towerController.towerModel.maxFuelCapacity) * 100f;
 
             // 0.1% 단위로 내림
             float displayPercent = Mathf.Floor(percent * 10f) / 10f;
@@ -99,13 +100,14 @@ public class TowerView : MonoBehaviour
 
     public void UpdatePossibilityOfPowerDownText(TowerStateMachine towerStateMachine)
     {
-        possibilityOfPowerDownText.text = $"전력 차단 확률 : {towerStateMachine.possibilityOfPowerDown}%";
+        possibilityOfPowerDownText.text = $"전력 차단 확률 : {towerStateMachine.currPossibilityOfPowerDown}%";
     }
     #endregion
 
     #region 스탯 관련 메서드
     public void UpdateTowerStatText(TowerStateMachine towerStateMachine)
     {
+        towerLevelText.text = $"Level : {towerStateMachine.towerController.towerModel.towerLv}";
         towerAttackPowerText.text = $"공격력 : {towerStateMachine.towerController.towerModel.attackPower}";
         towerAttackSpeedText.text = $"공격속도 : {towerStateMachine.towerController.towerModel.attackSpeed}";
     }

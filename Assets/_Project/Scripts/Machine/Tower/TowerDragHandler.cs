@@ -175,6 +175,8 @@ public class TowerDragHandler : MonoBehaviour
         TowerManager.Instance.towerList.Add(upgradeTower);
         grid.SetTower(node, upgradeTower);
 
+        upgradeTower.towerController.towerStatCalculator.RecalculateStats(upgradeTower); // 스탯 계산
+
         TowerManager.Instance.towerList.Remove(_tower);
         Destroy(_tower.gameObject);
     }

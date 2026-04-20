@@ -1,16 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : SingleTon<AudioManager>
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public Slider BGMSlider;
+    public Slider SFXSlider;
 
-    // Update is called once per frame
+    public AudioSource bgmSource;
+    public AudioSource sfxSource;
+
     void Update()
     {
-        
+        bgmSource.volume = BGMSlider.value;
+        sfxSource.volume = SFXSlider.value;
+    }
+
+    public void PlaySFX(AudioClip sfxCilp)
+    {
+        sfxSource.PlayOneShot(sfxCilp);
     }
 }

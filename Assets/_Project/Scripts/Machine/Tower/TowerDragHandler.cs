@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class TowerDragHandler : MonoBehaviour
 {
-    [SerializeField] private LayerMask fieldLayerMask;
+    [SerializeField] private LayerMask _fieldLayerMask;
+    [SerializeField] private Collider[] _colliders;
+    [SerializeField] private AudioClip towerMergeSFX;
     private MachineGridObject _gridObject;
     private TowerStateMachine _tower;
 
@@ -13,17 +15,28 @@ public class TowerDragHandler : MonoBehaviour
     {
         _gridObject = GetComponent<MachineGridObject>();
         _tower = GetComponent<TowerStateMachine>();
+        _colliders = GetComponentsInChildren<Collider>();
     }
 
     private void OnMouseDown()
     {
         _startPosition = transform.position;
         _isDragging = true;
+        foreach(FieldNode fieldNode in FieldGridManager.Instance.fieldNodes)
+        {
+            fieldNode.ShowHighlight(true);
+        }
     }
 
     private void OnMouseDrag()
     {
         if (!_isDragging) return;
+
+        foreach(Collider collider in _colliders)
+        {
+            if(collider.name == "DetectSensor") continue;
+            collider.enabled = false;
+        }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -42,6 +55,16 @@ public class TowerDragHandler : MonoBehaviour
 
         _isDragging = false;
 
+        foreach(Collider collider in _colliders)
+        {
+            collider.enabled = true;
+        }
+
+        foreach(FieldNode fieldNode in FieldGridManager.Instance.fieldNodes)
+        {
+            fieldNode.ShowHighlight(false);
+        }
+
         TryDrop();
     }
 
@@ -49,7 +72,7 @@ public class TowerDragHandler : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, fieldLayerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, _fieldLayerMask))
         {
             FieldNode targetNode = hit.collider.GetComponent<FieldNode>();
 
@@ -113,22 +136,20 @@ public class TowerDragHandler : MonoBehaviour
             grid.RemoveTower(oldNode);
         }
 
-        transform.position = node.transform.position;
+        transform.position = node.transform.position + new Vector3(0,0.5f,0);
 
         grid.SetTower(node, _tower);
-
-        _gridObject.SetCurrentFieldNode(node);
     }
 
     private bool CanMerge(TowerStateMachine a, TowerStateMachine b)
     {
         // 지금은 간단히 "같은 이름"으로 판정
-        return a.name == b.name;
+        return a.towerController.towerModel.towerLv == b.towerController.towerModel.towerLv;
     }
 
     private void Merge(FieldNode node, TowerStateMachine otherTower)
     {
-        Debug.Log("합성!");
+        AudioManager.Instance.PlaySFX(towerMergeSFX);
 
         FieldGridManager grid = FieldGridManager.Instance;
 
@@ -140,10 +161,22 @@ public class TowerDragHandler : MonoBehaviour
 
         grid.RemoveTower(node);
 
+        TowerManager.Instance.towerList.Remove(otherTower);
         Destroy(otherTower.gameObject);
-        Destroy(gameObject);
 
-        // 👉 여기서 다음 티어 타워 생성하면 됨 (다음 단계)
+        TowerStateMachine upgradeTower = 
+        Instantiate
+        (
+            TowerManager.Instance.towerRevolutionList[otherTower.towerController.towerModel.towerLv + 1], 
+            node.transform.transform.position + new Vector3(0, 0.5f, 0),
+            Quaternion.identity
+        ).GetComponent<TowerStateMachine>();
+        upgradeTower.transform.SetParent(FieldGridManager.Instance.objectTilemap.transform);
+        TowerManager.Instance.towerList.Add(upgradeTower);
+        grid.SetTower(node, upgradeTower);
+
+        TowerManager.Instance.towerList.Remove(_tower);
+        Destroy(_tower.gameObject);
     }
 
     private void ReturnToStart()

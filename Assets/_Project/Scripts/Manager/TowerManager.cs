@@ -6,6 +6,8 @@ using System;
 public class TowerManager : SingleTon<TowerManager>
 {
     public List<TowerStateMachine> towerList = new();
+    public List<GameObject> towerRevolutionList = new();
+
     
 
     void Start()

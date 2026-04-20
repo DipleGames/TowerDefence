@@ -666,6 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ed970b7e4b13b47b7821f843e51125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerLv: 0
   detectRange: 8
   attackPower: 20
   attackSpeed: 1

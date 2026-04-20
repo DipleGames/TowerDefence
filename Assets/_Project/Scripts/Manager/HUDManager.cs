@@ -17,6 +17,11 @@ public class HUDManager : SingleTon<HUDManager>
     public Text gameStateTimeText;
     public GameObject skipBtn;
 
+    [Header("옵션 UI")]
+    public Button optionBtn;
+    public GameObject optionPanel;
+
+
     [Header("타워 정보")]
     public GameObject towerStatePaenl;
 
@@ -25,6 +30,10 @@ public class HUDManager : SingleTon<HUDManager>
         ui.SetActive(b);
     }
 
+    public void OnClickedOptionBtn()
+    {
+        SwitchHUD(optionPanel, !optionPanel.activeSelf);
+    }
 
     // 뷰 체인지 버튼 클릭 시 호출
     public void OnChangeViewChangeBtnText(GirdView gridView)

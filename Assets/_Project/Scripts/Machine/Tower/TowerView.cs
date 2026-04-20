@@ -121,9 +121,9 @@ public class TowerView : MonoBehaviour
             {
                 cost += tower.towerController.towerModel.fuelSupplyRequiredCost;
             }
+            
         }
         fuelSupplyCostText.text = $"{cost}";
-
     }
 
     public void UpdateRepairPowerCostText()

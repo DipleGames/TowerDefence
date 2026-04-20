@@ -4,17 +4,18 @@ using UnityEngine.Tilemaps;
 
 public class FieldGridManager : SingleTon<FieldGridManager>
 {
-    [SerializeField] private List<FieldNode> fieldNodes = new();
-    [SerializeField] private Tilemap fieldTilemap;
+    public List<FieldNode> fieldNodes = new();
+    [SerializeField] private Tilemap _fieldTilemap;
+    public Tilemap objectTilemap;
 
     private Dictionary<FieldNode, TowerStateMachine> _placedTowers = new();
 
     protected override void Awake()
     {
         base.Awake();
-        for(int i=0; i<fieldTilemap.transform.childCount; i++)
+        for(int i=0; i<_fieldTilemap.transform.childCount; i++)
         {
-            fieldNodes.Add(fieldTilemap.transform.GetChild(i).transform.GetComponent<FieldNode>());
+            fieldNodes.Add(_fieldTilemap.transform.GetChild(i).transform.GetComponent<FieldNode>());
         }
     }
 

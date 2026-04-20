@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class TowerModel : MonoBehaviour
 {
     [Header("타워 정보")]
+    public int towerLv = 0;
     public float detectRange; // 감지 영역
     public float attackPower; // 공격 데미지
     public float attackSpeed; // 공격 딜레이

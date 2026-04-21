@@ -121,7 +121,7 @@ public class TowerView : MonoBehaviour
         {
             if(tower.towerStateMachine.isFuelShortage)
             {
-                cost += tower.towerModel.fuelSupplyRequiredCost;
+                cost += tower.towerModel.towerInfo.fuelSupplyRequiredCost;
             }
             
         }
@@ -135,7 +135,7 @@ public class TowerView : MonoBehaviour
         {
             if(tower.towerStateMachine.isPowerDown)
             {
-                cost += tower.towerModel.repairPowerRequiredCost;
+                cost += tower.towerModel.towerInfo.repairPowerRequiredCost;
             }
         }
         repairPowerCostText.text = $"{cost}";

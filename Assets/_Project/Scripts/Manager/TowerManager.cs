@@ -53,10 +53,10 @@ public class TowerManager : SingleTon<TowerManager>
 
     public IEnumerator FuelSupply(TowerController towerController, TowerModel towerModel)
     {
-        if(GoldManager.Instance.CurrGold < towerModel.fuelSupplyRequiredCost) yield break;
+        if(GoldManager.Instance.CurrGold < towerModel.towerInfo.fuelSupplyRequiredCost) yield break;
 
         Debug.Log($"{towerController.towerStateMachine}에 연료를 공급하고있습니다..");
-        GoldManager.Instance.SubtractGold(towerModel.fuelSupplyRequiredCost);
+        GoldManager.Instance.SubtractGold(towerModel.towerInfo.fuelSupplyRequiredCost);
         yield return new WaitForSeconds(2f);
         towerController.towerStateMachine.currFuelCapacity = towerModel.maxFuelCapacity;
         towerController.towerStateMachine.isFuelShortage = false;
@@ -85,10 +85,10 @@ public class TowerManager : SingleTon<TowerManager>
 
     public IEnumerator RepairPower(TowerController towerController, TowerModel towerModel)
     {
-        if(GoldManager.Instance.CurrGold < towerModel.repairPowerRequiredCost) yield break;
+        if(GoldManager.Instance.CurrGold < towerModel.towerInfo.repairPowerRequiredCost) yield break;
 
         Debug.Log($"{towerController.towerStateMachine}에 파워를 수리하고있습니다..");
-        GoldManager.Instance.SubtractGold(towerModel.repairPowerRequiredCost);
+        GoldManager.Instance.SubtractGold(towerModel.towerInfo.repairPowerRequiredCost);
         yield return new WaitForSeconds(2f);
         towerController.towerStateMachine.isPowerDown = false;
         ViewManager.Instance.towerView.UpdateRepairPowerCostText();

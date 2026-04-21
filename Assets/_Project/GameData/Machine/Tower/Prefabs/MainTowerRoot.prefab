@@ -667,13 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ed970b7e4b13b47b7821f843e51125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRange: 8
-  baseAttackPower: 20
-  baseAttackSpeed: 1
-  baseMaxFuelCapacity: 180
-  baseReducedPowerOutageChance: 0
-  fuelSupplyRequiredCost: 30
-  repairPowerRequiredCost: 30
+  towerInfo: {fileID: 11400000, guid: 7ad58066241f09f4fb7f5e90d0a47e57, type: 2}
   towerLv: 0
   attackPower: 20
   attackSpeed: 1
@@ -715,6 +709,7 @@ MonoBehaviour:
   towerModel: {fileID: 8784144841693791382}
   towerStateMachine: {fileID: 4289968243516913745}
   towerStatCalculator: {fileID: 1438697236711998500}
+  towerDragHandler: {fileID: 0}
   cannon: {fileID: 2673843622791543975}
   detectSensor: {fileID: 5794420083551983604}
 --- !u!114 &1939428296980053671

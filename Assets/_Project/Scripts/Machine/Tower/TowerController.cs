@@ -10,6 +10,7 @@ public class TowerController : MonoBehaviour, IAttackable
     public TowerModel towerModel;
     public TowerStateMachine towerStateMachine;
     public TowerStatCalculator towerStatCalculator;
+    public TowerDragHandler towerDragHandler;
 
     [Header("타워 부착물")]
     public Cannon cannon;
@@ -22,7 +23,7 @@ public class TowerController : MonoBehaviour, IAttackable
 
     void InitTower()
     {
-        detectSensor.radius = towerModel.detectRange;
+        detectSensor.radius = towerModel.towerInfo.detectRange;
         
         towerStatCalculator.RecalculateStats(this); // 스탯 계산
         towerStateMachine.currFuelCapacity = towerModel.maxFuelCapacity; // 연료 주입

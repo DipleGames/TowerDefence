@@ -5,7 +5,7 @@ public class TowerFuelSupplyButton : TowerRepairButton
 {
     protected override void OnEnable()
     {
-        transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"{GetComponentInParent<TowerModel>().fuelSupplyRequiredCost}";    
+        transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"{GetComponentInParent<TowerModel>().towerInfo.fuelSupplyRequiredCost}";    
     }
 
     public override void OnClickedRepairButton()

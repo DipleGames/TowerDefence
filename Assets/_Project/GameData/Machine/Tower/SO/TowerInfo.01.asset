@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71d1688c9c421e4f864919592f082ae, type: 3}
+  m_Name: TowerInfo.01
+  m_EditorClassIdentifier: 
+  detectRange: 0
+  baseAttackPower: 0
+  baseAttackSpeed: 0
+  baseMaxFuelCapacity: 0
+  baseReducedPowerOutageChance: 0
+  fuelSupplyRequiredCost: 0
+  repairPowerRequiredCost: 0

@@ -117,11 +117,11 @@ public class TowerView : MonoBehaviour
     public void UpdateFuelSupplyCostText()
     {
         int cost = 0;
-        foreach(TowerStateMachine tower in TowerManager.Instance.towerList)
+        foreach(TowerController tower in TowerManager.Instance.towerList)
         {
-            if(tower.isFuelShortage)
+            if(tower.towerStateMachine.isFuelShortage)
             {
-                cost += tower.towerController.towerModel.fuelSupplyRequiredCost;
+                cost += tower.towerModel.fuelSupplyRequiredCost;
             }
             
         }
@@ -131,11 +131,11 @@ public class TowerView : MonoBehaviour
     public void UpdateRepairPowerCostText()
     {
         int cost = 0;
-        foreach(TowerStateMachine tower in TowerManager.Instance.towerList)
+        foreach(TowerController tower in TowerManager.Instance.towerList)
         {
-            if(tower.isPowerDown)
+            if(tower.towerStateMachine.isPowerDown)
             {
-                cost += tower.towerController.towerModel.repairPowerRequiredCost;
+                cost += tower.towerModel.repairPowerRequiredCost;
             }
         }
         repairPowerCostText.text = $"{cost}";

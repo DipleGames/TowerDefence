@@ -4,9 +4,10 @@ public enum MachineState { Active , InActive }
 
 public abstract class Machine : MonoBehaviour
 {
+    [Header("현재 연료량")]
     public float currFuelCapacity;
 
-    [Header("파워 차단 관련")]
+    [Header("현재 파워 차단 확률")]
     public float currPossibilityOfPowerDown;
 
     [Header("고장 상태")]

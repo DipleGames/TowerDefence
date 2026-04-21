@@ -5,7 +5,7 @@ using System;
 
 public class TowerManager : SingleTon<TowerManager>
 {
-    public List<TowerStateMachine> towerList = new();
+    public List<TowerController> towerList = new();
     public List<GameObject> towerRevolutionList = new();
 
  
@@ -25,8 +25,8 @@ public class TowerManager : SingleTon<TowerManager>
         foreach(GameObject tower in towers)
         {
             tower.GetComponentInChildren<Canvas>(true).worldCamera = Camera.main;
-            TowerStateMachine towerStateMachine = tower.GetComponent<TowerStateMachine>();
-            towerList.Add(towerStateMachine);
+            TowerController towerController = tower.GetComponent<TowerController>();
+            towerList.Add(towerController);
         }
     }
 
@@ -35,31 +35,31 @@ public class TowerManager : SingleTon<TowerManager>
     /// <summary>
     /// 연료 공급
     /// </summary>
-    public void TryFuelSupply(TowerStateMachine towerStateMachine, TowerModel towerModel)
+    public void TryFuelSupply(TowerController towerController, TowerModel towerModel)
     {
-        StartCoroutine(FuelSupply(towerStateMachine, towerModel));
+        StartCoroutine(FuelSupply(towerController, towerModel));
     }
 
     public void TryAllFuelSupply()
     {
-        foreach(TowerStateMachine tower in towerList)
+        foreach(TowerController tower in towerList)
         {
-            if(tower.isFuelShortage)
+            if(tower.towerStateMachine.isFuelShortage)
             {
-                StartCoroutine(FuelSupply(tower, tower.towerController.towerModel));
+                StartCoroutine(FuelSupply(tower, tower.towerModel));
             }
         }
     }
 
-    public IEnumerator FuelSupply(TowerStateMachine towerStateMachine, TowerModel towerModel)
+    public IEnumerator FuelSupply(TowerController towerController, TowerModel towerModel)
     {
         if(GoldManager.Instance.CurrGold < towerModel.fuelSupplyRequiredCost) yield break;
 
-        Debug.Log($"{towerStateMachine}에 연료를 공급하고있습니다..");
+        Debug.Log($"{towerController.towerStateMachine}에 연료를 공급하고있습니다..");
         GoldManager.Instance.SubtractGold(towerModel.fuelSupplyRequiredCost);
         yield return new WaitForSeconds(2f);
-        towerStateMachine.currFuelCapacity = towerModel.maxFuelCapacity;
-        towerStateMachine.isFuelShortage = false;
+        towerController.towerStateMachine.currFuelCapacity = towerModel.maxFuelCapacity;
+        towerController.towerStateMachine.isFuelShortage = false;
         ViewManager.Instance.towerView.UpdateFuelSupplyCostText();
         yield break;
     }
@@ -67,30 +67,30 @@ public class TowerManager : SingleTon<TowerManager>
     /// <summary>
     /// 파워 수리
     /// </summary>
-    public void TryRepairPower(TowerStateMachine towerStateMachine, TowerModel towerModel)
+    public void TryRepairPower(TowerController towerController, TowerModel towerModel)
     {
-        StartCoroutine(RepairPower(towerStateMachine, towerModel));
+        StartCoroutine(RepairPower(towerController, towerModel));
     }
 
     public void TryAllRepairPower()
     {
-        foreach(TowerStateMachine tower in towerList)
+        foreach(TowerController tower in towerList)
         {
-            if(tower.isPowerDown)
+            if(tower.towerStateMachine.isPowerDown)
             {
-                StartCoroutine(RepairPower(tower, tower.towerController.towerModel));
+                StartCoroutine(RepairPower(tower, tower.towerModel));
             }
         }
     }
 
-    public IEnumerator RepairPower(TowerStateMachine towerStateMachine, TowerModel towerModel)
+    public IEnumerator RepairPower(TowerController towerController, TowerModel towerModel)
     {
         if(GoldManager.Instance.CurrGold < towerModel.repairPowerRequiredCost) yield break;
 
-        Debug.Log($"{towerStateMachine}에 파워를 수리하고있습니다..");
+        Debug.Log($"{towerController.towerStateMachine}에 파워를 수리하고있습니다..");
         GoldManager.Instance.SubtractGold(towerModel.repairPowerRequiredCost);
         yield return new WaitForSeconds(2f);
-        towerStateMachine.isPowerDown = false;
+        towerController.towerStateMachine.isPowerDown = false;
         ViewManager.Instance.towerView.UpdateRepairPowerCostText();
         yield break;
     }

@@ -6,7 +6,7 @@ public class TowerDragHandler : MonoBehaviour
     [SerializeField] private Collider[] _colliders;
     [SerializeField] private AudioClip towerMergeSFX;
     private MachineGridObject _gridObject;
-    private TowerStateMachine _tower;
+    private TowerController _tower;
 
     private Vector3 _startPosition;
     private bool _isDragging;
@@ -14,7 +14,7 @@ public class TowerDragHandler : MonoBehaviour
     private void Awake()
     {
         _gridObject = GetComponent<MachineGridObject>();
-        _tower = GetComponent<TowerStateMachine>();
+        _tower = GetComponent<TowerController>();
         _colliders = GetComponentsInChildren<Collider>();
     }
 
@@ -112,7 +112,7 @@ public class TowerDragHandler : MonoBehaviour
         }
 
         // 2. 타워 있음
-        TowerStateMachine otherTower = grid.GetTower(targetNode);
+        TowerController otherTower = grid.GetTower(targetNode);
 
         if (CanMerge(_tower, otherTower))
         {
@@ -141,13 +141,13 @@ public class TowerDragHandler : MonoBehaviour
         grid.SetTower(node, _tower);
     }
 
-    private bool CanMerge(TowerStateMachine a, TowerStateMachine b)
+    private bool CanMerge(TowerController a, TowerController b)
     {
         // 지금은 간단히 "같은 이름"으로 판정
-        return a.towerController.towerModel.towerLv == b.towerController.towerModel.towerLv;
+        return a.towerModel.towerLv == b.towerModel.towerLv;
     }
 
-    private void Merge(FieldNode node, TowerStateMachine otherTower)
+    private void Merge(FieldNode node, TowerController otherTower)
     {
         AudioManager.Instance.PlaySFX(towerMergeSFX);
 
@@ -164,18 +164,18 @@ public class TowerDragHandler : MonoBehaviour
         TowerManager.Instance.towerList.Remove(otherTower);
         Destroy(otherTower.gameObject);
 
-        TowerStateMachine upgradeTower = 
+        TowerController upgradeTower = 
         Instantiate
         (
-            TowerManager.Instance.towerRevolutionList[otherTower.towerController.towerModel.towerLv + 1], 
+            TowerManager.Instance.towerRevolutionList[otherTower.towerModel.towerLv + 1], 
             node.transform.transform.position + new Vector3(0, 0.5f, 0),
             Quaternion.identity
-        ).GetComponent<TowerStateMachine>();
+        ).GetComponent<TowerController>();
         upgradeTower.transform.SetParent(FieldGridManager.Instance.objectTilemap.transform);
         TowerManager.Instance.towerList.Add(upgradeTower);
         grid.SetTower(node, upgradeTower);
 
-        upgradeTower.towerController.towerStatCalculator.RecalculateStats(upgradeTower); // 스탯 계산
+        upgradeTower.towerStatCalculator.RecalculateStats(upgradeTower); // 스탯 계산
 
         TowerManager.Instance.towerList.Remove(_tower);
         Destroy(_tower.gameObject);

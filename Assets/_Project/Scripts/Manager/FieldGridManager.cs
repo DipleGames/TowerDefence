@@ -8,7 +8,7 @@ public class FieldGridManager : SingleTon<FieldGridManager>
     [SerializeField] private Tilemap _fieldTilemap;
     public Tilemap objectTilemap;
 
-    private Dictionary<FieldNode, TowerStateMachine> _placedTowers = new();
+    private Dictionary<FieldNode, TowerController> _placedTowers = new();
 
     protected override void Awake()
     {
@@ -35,13 +35,13 @@ public class FieldGridManager : SingleTon<FieldGridManager>
         return _placedTowers.ContainsKey(node);
     }
 
-    public TowerStateMachine GetTower(FieldNode node)
+    public TowerController GetTower(FieldNode node)
     {
-        _placedTowers.TryGetValue(node, out TowerStateMachine tower);
+        _placedTowers.TryGetValue(node, out TowerController tower);
         return tower;
     }
 
-    public void SetTower(FieldNode node, TowerStateMachine tower)
+    public void SetTower(FieldNode node, TowerController tower)
     {
         _placedTowers[node] = tower;
         node.SetTower(tower);
@@ -55,7 +55,7 @@ public class FieldGridManager : SingleTon<FieldGridManager>
 
     public void RemoveTower(FieldNode node)
     {
-        if (_placedTowers.TryGetValue(node, out TowerStateMachine tower))
+        if (_placedTowers.TryGetValue(node, out TowerController tower))
         {
             MachineGridObject towerGridObject = tower.GetComponent<MachineGridObject>();
             if (towerGridObject != null)
@@ -75,7 +75,7 @@ public class FieldGridManager : SingleTon<FieldGridManager>
         return node.transform.position;
     }
 
-    public FieldNode FindFieldNodeUnderTower(TowerStateMachine tower)
+    public FieldNode FindFieldNodeUnderTower(TowerController tower)
     {
         Vector3 origin = tower.transform.position + Vector3.up * 2f;
 
@@ -88,9 +88,9 @@ public class FieldGridManager : SingleTon<FieldGridManager>
         return null;
     }
 
-    public void RegisterExistingTowers(List<TowerStateMachine> towerList)
+    public void RegisterExistingTowers(List<TowerController> towerList)
     {
-        foreach (TowerStateMachine tower in towerList)
+        foreach (TowerController tower in towerList)
         {
             FieldNode node = FindFieldNodeUnderTower(tower);
 

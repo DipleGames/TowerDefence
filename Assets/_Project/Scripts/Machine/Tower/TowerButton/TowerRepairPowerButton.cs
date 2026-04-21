@@ -11,7 +11,7 @@ public class TowerRepairPowerButton : TowerRepairButton
     public override void OnClickedRepairButton()
     {
         Debug.Log("클릭");
-        TowerManager.Instance.TryRepairPower(GetComponentInParent<TowerStateMachine>(), GetComponentInParent<TowerModel>());
+        TowerManager.Instance.TryRepairPower(GetComponentInParent<TowerController>(), GetComponentInParent<TowerModel>());
         gameObject.transform.parent.gameObject.SetActive(false);
     }
 }

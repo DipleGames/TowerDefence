@@ -24,7 +24,7 @@ public class TowerController : MonoBehaviour, IAttackable
     {
         detectSensor.radius = towerModel.detectRange;
         
-        towerStatCalculator.RecalculateStats(towerStateMachine); // 스탯 계산
+        towerStatCalculator.RecalculateStats(this); // 스탯 계산
         towerStateMachine.currFuelCapacity = towerModel.maxFuelCapacity; // 연료 주입
     }
 

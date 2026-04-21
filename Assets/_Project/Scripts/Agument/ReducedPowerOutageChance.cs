@@ -12,7 +12,7 @@ public class ReducedPowerOutageChance : AugmentData
 
         foreach (var t in TowerManager.Instance.towerList)
         {
-            t.towerController.towerStatCalculator.RecalculateStats(t);
+            t.towerStatCalculator.RecalculateStats(t);
         }
         yield break;
     }

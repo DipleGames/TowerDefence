@@ -5,11 +5,11 @@ public class FieldNode : MonoBehaviour
     [SerializeField] private GameObject highlightObject;
     public Vector3 WorldPosition => transform.position;
 
-    public TowerStateMachine CurrentTower { get; private set; }
+    public TowerController CurrentTower { get; private set; }
 
     public bool HasTower => CurrentTower != null;
 
-    public void SetTower(TowerStateMachine tower)
+    public void SetTower(TowerController tower)
     {
         CurrentTower = tower;
     }

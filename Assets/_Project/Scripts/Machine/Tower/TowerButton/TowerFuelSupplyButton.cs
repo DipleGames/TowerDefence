@@ -11,7 +11,7 @@ public class TowerFuelSupplyButton : TowerRepairButton
     public override void OnClickedRepairButton()
     {
         Debug.Log("클릭");
-        TowerManager.Instance.TryFuelSupply(GetComponentInParent<TowerStateMachine>(), GetComponentInParent<TowerModel>());
+        TowerManager.Instance.TryFuelSupply(GetComponentInParent<TowerController>(), GetComponentInParent<TowerModel>());
         gameObject.transform.parent.gameObject.SetActive(false);
     }
 }

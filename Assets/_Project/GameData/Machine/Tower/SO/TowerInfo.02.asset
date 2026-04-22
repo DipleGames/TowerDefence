@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71d1688c9c421e4f864919592f082ae, type: 3}
   m_Name: TowerInfo.02
   m_EditorClassIdentifier: 
-  detectRange: 0
-  baseAttackPower: 0
-  baseAttackSpeed: 0
-  baseMaxFuelCapacity: 0
-  baseReducedPowerOutageChance: 0
-  fuelSupplyRequiredCost: 0
-  repairPowerRequiredCost: 0
+  towerLv: 2
+  detectRange: 5
+  baseAttackPower: 45
+  baseAttackSpeed: 1
+  baseMaxFuelCapacity: 180
+  baseReducedPowerOutageChance: 2
+  fuelSupplyRequiredCost: 120
+  repairPowerRequiredCost: 120

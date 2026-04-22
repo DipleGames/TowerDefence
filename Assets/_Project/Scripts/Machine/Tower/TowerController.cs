@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class TowerController : MonoBehaviour, IAttackable
 {
     [Header("실제 타겟")]
     public MonsterController targetMC; 
+    [Header("타워가 감지한 몬스터 목록")]
+    public List<MonsterController> monsters = new();
 
     [Header("타워 컴퍼넌트")]
     public TowerModel towerModel;
@@ -35,9 +38,9 @@ public class TowerController : MonoBehaviour, IAttackable
         {
             MonsterController monsterController = other.GetComponentInParent<MonsterController>();
 
-            if (monsterController != null && !towerModel.monsters.Contains(monsterController))
+            if (monsterController != null && !monsters.Contains(monsterController))
             {
-                towerModel.monsters.Add(monsterController);
+                monsters.Add(monsterController);
             }
         }
     }
@@ -48,7 +51,7 @@ public class TowerController : MonoBehaviour, IAttackable
         if (other.CompareTag("Monster"))
         {
             MonsterController monsterController = other.GetComponentInParent<MonsterController>();
-            towerModel.monsters.Remove(monsterController);
+            monsters.Remove(monsterController);
         }
     }
 
@@ -117,14 +120,14 @@ public class TowerController : MonoBehaviour, IAttackable
         MonsterController closest = null;
         float minDistSqr = float.MaxValue;
 
-        for (int i = towerModel.monsters.Count - 1; i >= 0; i--)
+        for (int i = monsters.Count - 1; i >= 0; i--)
         {
-            MonsterController m = towerModel.monsters[i];
+            MonsterController m = monsters[i];
 
             // 이미 죽었거나 파괴된 몬스터 정리
             if (m == null || !m.gameObject.activeInHierarchy)
             {
-                towerModel.monsters.RemoveAt(i);
+                monsters.RemoveAt(i);
                 continue;
             }
 

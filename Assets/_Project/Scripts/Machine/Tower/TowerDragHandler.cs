@@ -20,6 +20,8 @@ public class TowerDragHandler : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(_tower.towerStateMachine.towerState == MachineState.InActive) return;
+
         _startPosition = transform.position;
         _isDragging = true;
         foreach(FieldNode fieldNode in FieldGridManager.Instance.fieldNodes)
@@ -143,8 +145,13 @@ public class TowerDragHandler : MonoBehaviour
 
     private bool CanMerge(TowerController a, TowerController b)
     {
-        // 지금은 간단히 "같은 이름"으로 판정
-        return a.towerModel.towerLv == b.towerModel.towerLv;
+        if(a.towerStateMachine.towerState == MachineState.InActive || b.towerStateMachine.towerState == MachineState.InActive)
+        {
+            return false;
+        }
+
+        bool canMerge = (a.towerModel.towerInfo.towerLv == b.towerModel.towerInfo.towerLv) && (a.name == b.name);
+        return canMerge;
     }
 
     private void Merge(FieldNode node, TowerController otherTower)
@@ -167,7 +174,7 @@ public class TowerDragHandler : MonoBehaviour
         TowerController upgradeTower = 
         Instantiate
         (
-            TowerManager.Instance.towerRevolutionList[otherTower.towerModel.towerLv + 1], 
+            TowerManager.Instance.towerRevolutionList[otherTower.towerModel.towerInfo.towerLv + 1], 
             node.transform.transform.position + new Vector3(0, 0.5f, 0),
             Quaternion.identity
         ).GetComponent<TowerController>();

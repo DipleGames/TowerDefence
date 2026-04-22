@@ -107,7 +107,7 @@ public class TowerView : MonoBehaviour
     #region 스탯 관련 메서드
     public void UpdateTowerStatText(TowerStateMachine towerStateMachine)
     {
-        towerLevelText.text = $"Level : {towerStateMachine.towerController.towerModel.towerLv}";
+        towerLevelText.text = $"Level : {towerStateMachine.towerController.towerModel.towerInfo.towerLv}";
         towerAttackPowerText.text = $"공격력 : {towerStateMachine.towerController.towerModel.attackPower}";
         towerAttackSpeedText.text = $"공격속도 : {towerStateMachine.towerController.towerModel.attackSpeed}";
     }

@@ -30,7 +30,11 @@ public class TowerManager : SingleTon<TowerManager>
         }
     }
 
-    
+    public void SpawnTower()
+    {
+        
+    }
+
 
     /// <summary>
     /// 연료 공급

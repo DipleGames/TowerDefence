@@ -32,7 +32,20 @@ public class TowerManager : SingleTon<TowerManager>
 
     public void SpawnTower()
     {
-        
+        if(!GoldManager.Instance.TryBuy(GoldManager.Instance.CurrGold, 100)) return;
+
+        foreach(FieldNode fieldNode in FieldGridManager.Instance.fieldNodes)
+        {
+            if(!FieldGridManager.Instance.HasTower(fieldNode))
+            {   
+                GameObject towerPrefab = Instantiate(towerRevolutionList[0]);
+                towerPrefab.transform.position = fieldNode.transform.position + new Vector3(0,0.5f,0);
+                FieldGridManager.Instance.SetTower(fieldNode, towerPrefab.GetComponent<TowerController>());
+                UpdateTowerList();
+
+                break;
+            }
+        }
     }
 
 

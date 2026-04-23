@@ -70,11 +70,13 @@ public class FieldGridManager : SingleTon<FieldGridManager>
         node.ClearTower();
     }
 
+    // 노드의 월드 포지션 구하는 메서드
     public Vector3 GetNodeCenterWorld(FieldNode node)
     {
         return node.transform.position;
     }
 
+    // 타워 밑에있는 노드가 어떤 노드인지 찾아주는 메서드
     public FieldNode FindFieldNodeUnderTower(TowerController tower)
     {
         Vector3 origin = tower.transform.position + Vector3.up * 2f;

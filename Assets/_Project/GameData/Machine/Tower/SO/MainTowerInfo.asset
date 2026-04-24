@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71d1688c9c421e4f864919592f082ae, type: 3}
   m_Name: MainTowerInfo
   m_EditorClassIdentifier: 
-  towerLv: 0
+  towerLv: -1
   detectRange: 8
   baseAttackPower: 30
   baseAttackSpeed: 0.8

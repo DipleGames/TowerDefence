@@ -10,7 +10,8 @@ public class HUDManager : SingleTon<HUDManager>
     public GameObject viewChangeBtn;
 
     [Header("골드 현황 텍스트")]
-    public Text currGoldText;
+    public Text currGoldText01;
+    public Text currGoldText02;
 
     [Header("게임 진행 관련 UI")]
     public Text gameStateText;
@@ -56,7 +57,8 @@ public class HUDManager : SingleTon<HUDManager>
     // 현재 골드가 바뀔 시 호출
     public void OnChangeCurrentGoldText(int currGold)
     {
-        currGoldText.text = $"{currGold}";
+        currGoldText01.text = $"{currGold}";
+        currGoldText02.text = $"{currGold}";
     }
 
     // 게임 상태가 바뀔 시 호출

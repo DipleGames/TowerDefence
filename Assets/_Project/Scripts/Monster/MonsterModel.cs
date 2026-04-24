@@ -13,7 +13,12 @@ public class MonsterModel : MonoBehaviour
             float nv = Mathf.Clamp(value, 0f, max);
             if (Mathf.Approximately(_currentHP, nv)) return;
             _currentHP = nv;
-            if(_currentHP <= 0f) Destroy(gameObject);
+            if(_currentHP <= 0f)
+            {
+                ParticleSystem hitEffect = PoolManager.Instance.GetHitEffect();
+                hitEffect.transform.position = transform.position;
+                Destroy(gameObject);
+            }
         }
     }
 }

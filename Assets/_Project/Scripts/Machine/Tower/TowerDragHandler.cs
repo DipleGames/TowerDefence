@@ -150,7 +150,7 @@ public class TowerDragHandler : MonoBehaviour
             return false;
         }
 
-        bool canMerge = (a.towerModel.towerInfo.towerLv == b.towerModel.towerInfo.towerLv) && (a.name == b.name);
+        bool canMerge = a.towerModel.towerInfo.towerLv == b.towerModel.towerInfo.towerLv;
         return canMerge;
     }
 

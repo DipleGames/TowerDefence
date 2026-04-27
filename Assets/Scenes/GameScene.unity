@@ -79245,6 +79245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 3477984685611838960, guid: 25c1429bd47646b46834ac16d15bda68, type: 3}
+  bossPrefab: {fileID: 3477984685611838960, guid: a1bfac2c4897fa340bc64c181ae7ceb2, type: 3}
 --- !u!4 &2003698278
 Transform:
   m_ObjectHideFlags: 0

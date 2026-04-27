@@ -169,13 +169,25 @@ public class GameManager : SingleTon<GameManager>
     // -----------------------------
     private IEnumerator WaveCoroutine()
     {
+        int spawnIndex = 0;
         while (gameState == GameState.Wave)
         {
-            if (MonsterSpawner.Instance != null)
+            if(currWave%5 != 0)
             {
                 MonsterSpawner.Instance.SpawnMonster();
-                yield return new WaitForSeconds(MonsterSpawner.Instance.spawnDelay);
+                spawnIndex++;
             }
+            else if(currWave%5 == 0 && spawnIndex == 0)
+            {
+                MonsterSpawner.Instance.SpawnBoss();
+                spawnIndex++;
+            }
+            else if(currWave%5 == 0 && spawnIndex != 0)
+            {
+                MonsterSpawner.Instance.SpawnMonster();
+                spawnIndex++;
+            }
+            yield return new WaitForSeconds(MonsterSpawner.Instance.spawnDelay);
         }
     }
 

@@ -15,8 +15,6 @@ public class MonsterModel : MonoBehaviour
             _currentHP = nv;
             if(_currentHP <= 0f)
             {
-                ParticleSystem hitEffect = PoolManager.Instance.GetHitEffect();
-                hitEffect.transform.position = transform.position;
                 Destroy(gameObject);
             }
         }

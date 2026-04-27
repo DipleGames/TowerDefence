@@ -33,6 +33,8 @@ public class MonsterController : MonoBehaviour, IDamageable
     public void TakeDamage(float amount)
     {
         monsterModel.CurrentHP -= amount;
+        ParticleSystem hitEffect = PoolManager.Instance.GetHitEffect();
+        hitEffect.transform.position = transform.position;
         ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);
     }
 }

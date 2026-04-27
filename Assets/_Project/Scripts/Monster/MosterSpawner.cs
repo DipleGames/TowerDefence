@@ -10,4 +10,9 @@ public class MonsterSpawner : SingleTon<MonsterSpawner>
     {
         factory.Create(MonsterType.Monster, transform.position);
     }
+
+    public void SpawnBoss()
+    {
+        factory.Create(MonsterType.Boss, transform.position);
+    }
 }

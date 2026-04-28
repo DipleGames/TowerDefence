@@ -603,11 +603,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerInfo: {fileID: 11400000, guid: 7155b45165c69e942baeecca17ffcd93, type: 2}
-  towerLv: 0
-  attackPower: 10
-  attackSpeed: 1
-  maxFuelCapacity: 60
-  monsters: []
+  attackPower: 0
+  attackSpeed: 0
+  maxFuelCapacity: 0
 --- !u!114 &2998761206172094858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,6 +639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetMC: {fileID: 0}
+  monsters: []
   towerModel: {fileID: 1622403925965746644}
   towerStateMachine: {fileID: 2998761206172094858}
   towerStatCalculator: {fileID: 8293532320862559063}

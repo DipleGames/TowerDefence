@@ -385,7 +385,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc799f775eb23d14cb4d7976cbfad09f, type: 2}
+  - {fileID: 2100000, guid: ac37eb99b81a18040bdafe40bc717bee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -561,11 +561,11 @@ GameObject:
   - component: {fileID: 8504811357119620222}
   - component: {fileID: 3640692015049497441}
   - component: {fileID: 1876963195817303695}
-  - component: {fileID: -5724827893892314548}
+  - component: {fileID: 3490993610624638200}
   - component: {fileID: 6875614777086799173}
   - component: {fileID: 8318301648847720322}
   m_Layer: 0
-  m_Name: TowerRoot.01
+  m_Name: TowerRoot.03
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -602,7 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ed970b7e4b13b47b7821f843e51125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerInfo: {fileID: 11400000, guid: f403adaf33f91cf449defc9caf63170e, type: 2}
+  towerInfo: {fileID: 11400000, guid: 3d2c8e0ccfc38874aaad9cbc032d36f7, type: 2}
   attackPower: 0
   attackSpeed: 0
   maxFuelCapacity: 0
@@ -622,7 +622,7 @@ MonoBehaviour:
   currPossibilityOfPowerDown: 0
   isFuelShortage: 0
   isPowerDown: 0
-  Mat_Active: {fileID: 2100000, guid: bc799f775eb23d14cb4d7976cbfad09f, type: 2}
+  Mat_Active: {fileID: 2100000, guid: ac37eb99b81a18040bdafe40bc717bee, type: 2}
   Mat_InActive: {fileID: 2100000, guid: 545b9a796fdf6894aaa746ce0d2eec35, type: 2}
   towerState: 0
   towerController: {fileID: 8504811357119620222}
@@ -642,7 +642,7 @@ MonoBehaviour:
   monsters: []
   towerModel: {fileID: 1622403925965746644}
   towerStateMachine: {fileID: 2998761206172094858}
-  towerStatCalculator: {fileID: -5724827893892314548}
+  towerStatCalculator: {fileID: 3490993610624638200}
   towerDragHandler: {fileID: 1876963195817303695}
   cannon: {fileID: 72005020294453461}
   detectSensor: {fileID: 1650897778288282893}
@@ -676,7 +676,7 @@ MonoBehaviour:
     m_Bits: 128
   _colliders: []
   towerMergeSFX: {fileID: 8300000, guid: 34a6454c9796cdb4f8a69c988ccaea24, type: 3}
---- !u!114 &-5724827893892314548
+--- !u!114 &3490993610624638200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

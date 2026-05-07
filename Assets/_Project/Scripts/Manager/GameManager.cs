@@ -73,22 +73,25 @@ public class GameManager : SingleTon<GameManager>
     /// <summary>
     /// 옵션창 등 Pause 진입 (Time.timeScale = 0)
     /// </summary>
+    private GameState _lastState;
     public void SetPause(bool isPause)
     {
         if (gameState == GameState.GameOver) return;
 
         if (isPause)
         {
+            if (gameState == GameState.Pause) return;
+
+            _lastState = gameState;
             gameState = GameState.Pause;
-            Time.timeScale = 0f;  // WaitForSeconds도 멈춤
+            Time.timeScale = 0f;
         }
         else
         {
-            Time.timeScale = 1f;
+            if (gameState != GameState.Pause) return;
 
-            // Pause 해제 시 어느 상태로 돌아갈지 정책이 필요함.
-            // 여기서는 "Prepare로 복귀"로 해둠. 원하면 lastState 저장해서 복귀도 가능.
-            gameState = GameState.Prepare;
+            Time.timeScale = 1f;
+            gameState = _lastState;
         }
     }
 

@@ -7,4 +7,5 @@ public class ViewManager : SingleTon<ViewManager>
     public MiningRigView miningRigView;
     public MonsterView monsterView;
     public AugmentView augmentView;
+    public CorePartsView corePartsView;
 }

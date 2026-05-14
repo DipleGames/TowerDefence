@@ -22,11 +22,14 @@ public class Cannon : MonoBehaviour
 
     public void Shot()
     {
-        Projectile proj = PoolManager.Instance.GetProj(); // 풀에서 총알 가져와서
- 
-        proj.gameObject.transform.position = transform.position; // 위치를 캐논으로 지정시키고
-        _damage = GetComponentInParent<TowerModel>().attackPower;
-        proj.InitProj(_currentTarget, _damage); // 정보를 초기화
+        Projectile proj = PoolManager.Instance.GetProj();
+
+        proj.transform.position = transform.position;
+
+        TowerModel tower = GetComponentInParent<TowerModel>();
+        float damage = tower.attackPower;
+
+        proj.InitProj(_currentTarget, damage);
     }
   
 }

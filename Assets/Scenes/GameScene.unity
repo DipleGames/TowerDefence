@@ -3984,10 +3984,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   corePartsPanel: {fileID: 1957332271}
-  corePartsList:
-  - {fileID: 105557894}
-  - {fileID: 1976629336}
-  - {fileID: 463032348}
+  corePartsSelectBtnList:
+  - {fileID: 105557899}
+  - {fileID: 1976629341}
+  - {fileID: 463032353}
 --- !u!1 &92240409
 GameObject:
   m_ObjectHideFlags: 0
@@ -10777,7 +10777,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8980a739d704d3347b8eb77aec45ca67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  corePartsList: []
+  corePartsList:
+  - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
+  - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
+  - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
+  - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
+  - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
   ownedCorePartsList: []
 --- !u!4 &243429253
 Transform:

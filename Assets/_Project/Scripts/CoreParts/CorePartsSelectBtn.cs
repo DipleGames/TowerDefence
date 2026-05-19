@@ -23,6 +23,7 @@ public class CorePartsSelectBtn : MonoBehaviour
         CorePartsManager.Instance.ownedCorePartsList.Add(currentCoreParts);
 
         ViewManager.Instance.corePartsView.corePartsPanel.SetActive(false);
+        ViewManager.Instance.corePartsView.SetOwnedCorePartsList();
         GameManager.Instance.SetPause(false);
     }
 }

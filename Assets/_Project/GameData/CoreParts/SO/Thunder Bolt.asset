@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b701471c47d6f4e9640d866bc3d081, type: 3}
   m_Name: Thunder Bolt
   m_EditorClassIdentifier: 
-  coreID: 0
+  coreID: 100
   coreName: "\uC36C\uB354\uBCFC\uD2B8"
-  coreDesc: 
+  coreDesc: "\uC36C\uB354\uBCFC\uD2B8\uC785\uB2C8\uB2E4."
   coreImg: {fileID: 0}
   thunderDamage: 5
   stunTime: 0.5

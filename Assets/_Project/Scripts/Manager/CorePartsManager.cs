@@ -34,6 +34,36 @@ public class CorePartsManager : SingleTon<CorePartsManager>
             currentCorePartsList.Add(corePartsList[ran]);
         }
 
-        ViewManager.Instance.corePartsView.SetCorePartsBtn(currentCorePartsList);
+        SetCorePartsBtn(currentCorePartsList);
+    }
+
+    public void SetCorePartsBtn(List<CoreParts> corePartsList)
+    {
+        for(int i=0; i<3; i++)
+        {
+            ViewManager.Instance.corePartsView.corePartsSelectBtnList[i].currentCoreParts = corePartsList[i];
+        }
+    }
+
+    public void SetOwnedCorePartsList()
+    {
+        for (int i = 0; i < ownedCorePartsList.Count; i++)
+        {
+            if(ownedCorePartsList.Count > 6)
+            {
+                Debug.Log("다음페이지");
+                return;
+            }
+            Transform slot = ViewManager.Instance.corePartsView.ownedCorePartsListPanel.transform.GetChild(i);
+
+            CorePartsSlot corePartsSlot = slot.GetComponent<CorePartsSlot>();
+
+            corePartsSlot.SetCorePartsSlot(ownedCorePartsList[i]);
+            corePartsSlot.corePartsIcon.sprite = corePartsSlot.currentCoreParts.coreImg;
+            if(corePartsSlot.corePartsIcon != null)
+            { 
+                corePartsSlot.corePartsIcon.gameObject.SetActive(true);
+            }
+        }
     }
 }

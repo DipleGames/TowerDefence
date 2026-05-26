@@ -34,16 +34,22 @@ public class CorePartsDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandl
 
             if (tower != null)
             {
-                Debug.Log("타워에 코어파츠 장착!");
-                CorePartsSlot corePartsSlot = GetComponentInParent<CorePartsSlot>();
-                tower.equippedPartsList.Add(corePartsSlot.currentCoreParts);
-                CorePartsManager.Instance.ownedCorePartsList.Remove(corePartsSlot.currentCoreParts);
-                corePartsSlot.ReleaseCorePartsSlot();
+                EquipCorePart(tower);
                 // 장착 처리
                 // tower.EquipCorePart(...);
             }
         }
 
         rectTransform.position = startPos;
+    }
+
+    void EquipCorePart(TowerModel tower)
+    {
+        Debug.Log("타워에 코어파츠 장착!");
+        CorePartsSlot corePartsSlot = GetComponentInParent<CorePartsSlot>();
+        AudioManager.Instance.PlaySFX(corePartsSlot.currentCoreParts.equipSFX);
+        tower.equippedPartsList.Add(corePartsSlot.currentCoreParts);
+        CorePartsManager.Instance.ownedCorePartsList.Remove(corePartsSlot.currentCoreParts);
+        corePartsSlot.ReleaseCorePartsSlot();
     }
 }

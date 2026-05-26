@@ -3,11 +3,12 @@ using UnityEngine;
 
 public abstract class CoreParts : ScriptableObject
 {
-    [Header("카드 정보")]
+    [Header("코어 정보")]
     public int coreID;
     public string coreName;
     public string coreDesc;
     public Sprite coreImg;
+    public AudioClip equipSFX;
 
     // 탈부착시 능력치 증가 파츠
     public virtual void OnEquip(TowerModel tower) { }

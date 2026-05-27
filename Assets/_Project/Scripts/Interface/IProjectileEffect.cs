@@ -1,4 +1,4 @@
 public interface IProjectileEffect
 {
-    void Apply(MonsterModel target, float baseDamage);
+    void Apply(MonsterController target, float baseDamage);
 }

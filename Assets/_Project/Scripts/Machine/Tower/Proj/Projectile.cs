@@ -39,10 +39,21 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Monster"))
+        if (other.CompareTag("Monster"))
         {
-            other.GetComponentInParent<IDamageable>().TakeDamage(_damage);
+            MonsterController monster = other.GetComponentInParent<MonsterController>();
+
+            if (monster != null)
+            {
+                monster.TakeDamage(_damage);
+
+                foreach (IProjectileEffect effect in _effects)
+                {
+                    effect.Apply(monster, _damage);
+                }
+            }
+
             PoolManager.Instance.ReturnProj(this);
         }
-    }
+}
 }

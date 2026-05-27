@@ -3,25 +3,27 @@ using UnityEngine.EventSystems;
 
 public class CorePartsDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private RectTransform rectTransform;
-    private Canvas canvas;
+    private RectTransform _rectTransform;
+    private Canvas _canvas;
+    private CorePartsSlot _corePartsSlot;
 
     private Vector3 startPos;
 
     private void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
-        canvas = GetComponentInParent<Canvas>();
+        _rectTransform = GetComponent<RectTransform>();
+        _canvas = GetComponentInParent<Canvas>();
+        _corePartsSlot = GetComponentInParent<CorePartsSlot>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        startPos = rectTransform.position;
+        startPos = _rectTransform.position;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.position += (Vector3)eventData.delta / canvas.scaleFactor;
+        _rectTransform.position += (Vector3)eventData.delta / _canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -34,22 +36,13 @@ public class CorePartsDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandl
 
             if (tower != null)
             {
-                EquipCorePart(tower);
+                tower.EquipCorePart(_corePartsSlot.currentCoreParts);
+                _corePartsSlot.ReleaseCorePartsSlot();
                 // 장착 처리
                 // tower.EquipCorePart(...);
             }
         }
 
-        rectTransform.position = startPos;
-    }
-
-    void EquipCorePart(TowerModel tower)
-    {
-        Debug.Log("타워에 코어파츠 장착!");
-        CorePartsSlot corePartsSlot = GetComponentInParent<CorePartsSlot>();
-        AudioManager.Instance.PlaySFX(corePartsSlot.currentCoreParts.equipSFX);
-        tower.equippedPartsList.Add(corePartsSlot.currentCoreParts);
-        CorePartsManager.Instance.ownedCorePartsList.Remove(corePartsSlot.currentCoreParts);
-        corePartsSlot.ReleaseCorePartsSlot();
+        _rectTransform.position = startPos;
     }
 }

@@ -13,4 +13,20 @@ public class TowerModel : MonoBehaviour
 
     [Header("타워에 장착된 파츠")]
     public List<CoreParts> equippedPartsList = new();
+
+    public void EquipCorePart(CoreParts corePart)
+    {
+        if (corePart == null) return;
+
+        equippedPartsList.Add(corePart);
+
+        corePart.OnEquip(this);
+        StartCoroutine(corePart.EquipCoroutine(this));
+
+         Debug.Log("타워에 코어파츠 장착!");
+
+
+        AudioManager.Instance.PlaySFX(corePart.equipSFX);
+        CorePartsManager.Instance.ownedCorePartsList.Remove(corePart);
+    }
 }

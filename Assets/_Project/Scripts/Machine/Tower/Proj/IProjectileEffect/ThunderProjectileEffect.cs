@@ -11,8 +11,8 @@ public class ThunderProjectileEffect : IProjectileEffect
         _stunTime = stunTime;
     }
 
-    public void Apply(MonsterModel target, float baseDamage)
+    public void Apply(MonsterController target, float baseDamage)
     {
-        
+        target.TakeDamage(_thunderDamage);
     }
 }

@@ -37,4 +37,9 @@ public class MonsterController : MonoBehaviour, IDamageable
         hitEffect.transform.position = transform.position;
         ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);
     }
+
+    public void Stun()
+    {
+        
+    }
 }

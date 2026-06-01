@@ -14,5 +14,6 @@ public class ThunderProjectileEffect : IProjectileEffect
     public void Apply(MonsterController target, float baseDamage)
     {
         target.TakeDamage(_thunderDamage);
+        Debug.Log($"효과가 적용되서{_thunderDamage}의 추가데미지");
     }
 }

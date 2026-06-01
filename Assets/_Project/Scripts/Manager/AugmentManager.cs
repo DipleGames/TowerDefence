@@ -22,13 +22,10 @@ public class AugmentManager : SingleTon<AugmentManager>
         ViewManager.Instance.augmentView.SwithcAugmentUI();
         GameManager.Instance.SetPause(true);
 
-        float endTime = Time.time + maxDuration;
+        yield return new WaitUntil(() => isAugmentSelected);
 
-        yield return new WaitUntil(() => isAugmentSelected || Time.time >= endTime);
         ViewManager.Instance.augmentView.SwithcAugmentUI();
         GameManager.Instance.SetPause(false);
-
-        yield break;
     }
 
     public void RollAugments()

@@ -198,14 +198,21 @@ public class GameManager : SingleTon<GameManager>
     {
         StartCoroutine(AugmentManager.Instance.AugmentPhase(prepareTime));
 
-        float _tick = 0f;
-        while (gameState == GameState.Prepare)
+        float tick = 0f;
+
+        while (gameState == GameState.Prepare || gameState == GameState.Pause)
         {
-            _tick += Time.deltaTime;
-            if(_tick > prepareTime)
+            if (gameState == GameState.Prepare)
+            {
+                tick += Time.deltaTime;
+            }
+
+            if (tick >= prepareTime)
             {
                 isReady = true;
+                yield break;
             }
+
             yield return null;
         }
     }

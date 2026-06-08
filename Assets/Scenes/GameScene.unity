@@ -10962,9 +10962,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   corePartsList:
   - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
+  - {fileID: 11400000, guid: 25a031f84e2557148bee68acb72ea95d, type: 2}
   - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
-  - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
-  - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
+  - {fileID: 11400000, guid: 25a031f84e2557148bee68acb72ea95d, type: 2}
   - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
   ownedCorePartsList: []
 --- !u!4 &243429253

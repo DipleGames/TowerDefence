@@ -11,6 +11,6 @@ public class FireballProjectileEffect : IProjectileEffect
 
     public void Apply(MonsterController target, float baseDamage)
     {
-        
+        Debug.Log("파이어볼 적용");
     }
 }

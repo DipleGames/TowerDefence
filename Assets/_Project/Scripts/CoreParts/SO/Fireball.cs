@@ -4,11 +4,11 @@ using UnityEngine;
 public class Fireball : CoreParts
 {
     [SerializeField] private float dotDamage = 5f;
-    [SerializeField] private GameObject fireAura;
+    [SerializeField] private GameObject fireTrail;
      
 
     public override void ApplyProjectileEffect(Projectile proj)
     {
-        proj.AddEffect(new FireballProjectileEffect(dotDamage));
+        proj.AddEffect(new FireballProjectileEffect(dotDamage, fireTrail));
     }
 }

@@ -18,3 +18,4 @@ MonoBehaviour:
   coreImg: {fileID: 21300000, guid: 5dca979e72aa2bb47bc305c50ee2eb9d, type: 3}
   equipSFX: {fileID: 8300000, guid: 1cb4afea88263b74694b15cd4fc537db, type: 3}
   dotDamage: 5
+  fireTrail: {fileID: 1314492804210673520, guid: bb90e97121c7e61469ac96530cf6ff8b, type: 3}

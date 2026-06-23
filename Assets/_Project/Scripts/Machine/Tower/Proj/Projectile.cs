@@ -1,15 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IPoolable
 {
     private Transform _target;
     private float _projSpeed;
     private float _damage;
-    private bool _isInit = false;
+    private bool _isInit;
 
-    [Header("적용된 효과")]
-    [SerializeField] private List<IProjectileEffect> _effects = new();
+    private List<IProjectileEffect> _effects = new();
 
     public void InitProj(Transform target, float damage)
     {
@@ -20,16 +19,18 @@ public class Projectile : MonoBehaviour
         _effects.Clear();
     }
 
-    void Update()
+    private void Update()
     {
-        if(!_isInit) return;
+        if (!_isInit) return;
 
-        if(_target == null)
+        if (_target == null)
         {
-            Destroy(gameObject);
+            PoolManager.Instance.ReturnProj(this);
             return;
         }
-        transform.position += (_target.position - transform.position).normalized * _projSpeed * Time.deltaTime;
+
+        Vector3 dir = (_target.position - transform.position).normalized;
+        transform.position += dir * _projSpeed * Time.deltaTime;
     }
 
     public void AddEffect(IProjectileEffect effect)
@@ -37,23 +38,44 @@ public class Projectile : MonoBehaviour
         _effects.Add(effect);
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Monster"))
+        if (!other.CompareTag("Monster"))
+            return;
+
+        IDamageable damageable = other.GetComponentInParent<IDamageable>();
+
+        if (damageable != null)
         {
-            MonsterController monster = other.GetComponentInParent<MonsterController>();
-
-            if (monster != null)
-            {
-                monster.TakeDamage(_damage);
-
-                foreach (IProjectileEffect effect in _effects)
-                {
-                    effect.Apply(monster, _damage);
-                }
-            }
-
-            PoolManager.Instance.ReturnProj(this);
+            damageable.TakeDamage(_damage);
         }
-}
+
+        MonsterController monster = other.GetComponentInParent<MonsterController>();
+
+        if (monster != null)
+        {
+            foreach (IProjectileEffect effect in _effects)
+            {
+                effect.Apply(monster, _damage);
+            }
+        }
+
+        PoolManager.Instance.ReturnProj(this);
+    }
+
+    public void OnSpawnFromPool()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void OnReturnToPool()
+    {
+        _target = null;
+        _damage = 0f;
+        _projSpeed = 0f;
+        _isInit = false;
+        _effects.Clear();
+
+        gameObject.SetActive(false);
+    }
 }

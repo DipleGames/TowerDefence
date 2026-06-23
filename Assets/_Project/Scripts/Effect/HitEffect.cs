@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HitEffect : MonoBehaviour
+public class HitEffect : MonoBehaviour, IPoolable
 {
     private ParticleSystem _ps;
 
@@ -13,7 +13,22 @@ public class HitEffect : MonoBehaviour
     {
         if (!_ps.IsAlive(true))
         {
-            PoolManager.Instance.ReturnHitEffect(_ps);
+            PoolManager.Instance.ReturnHitEffect(this);
         }
+    }
+
+    public void OnSpawnFromPool()
+    {
+        gameObject.SetActive(true);
+
+        _ps.Clear();
+        _ps.Play();
+    }
+
+    public void OnReturnToPool()
+    {
+        _ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        gameObject.SetActive(false);
     }
 }

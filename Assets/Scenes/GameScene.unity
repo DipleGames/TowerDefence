@@ -13382,6 +13382,8 @@ MonoBehaviour:
   _projParent: {fileID: 154714156}
   _hitEffect: {fileID: 4558408521707975080, guid: ce873261ef4ab124da8899f97a2f7c04, type: 3}
   _hitEffectParent: {fileID: 803225586}
+  _fireTrail: {fileID: 1314492804210673520, guid: bb90e97121c7e61469ac96530cf6ff8b, type: 3}
+  _fireTrailParent: {fileID: 1340400532}
 --- !u!4 &296809215
 Transform:
   m_ObjectHideFlags: 0
@@ -13397,6 +13399,7 @@ Transform:
   m_Children:
   - {fileID: 154714157}
   - {fileID: 803225587}
+  - {fileID: 1340400533}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &296814785
@@ -56056,6 +56059,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4094345211672303950, guid: 0e9b7c648189f6a4eadd169052c39a04, type: 3}
   m_PrefabInstance: {fileID: 1678676547}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1340400532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1340400533}
+  m_Layer: 0
+  m_Name: FireTrailParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1340400533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340400532}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 296809215}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1341923496
 PrefabInstance:
   m_ObjectHideFlags: 0

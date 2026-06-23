@@ -9,6 +9,6 @@ public class Fireball : CoreParts
 
     public override void ApplyProjectileEffect(Projectile proj)
     {
-        proj.AddEffect(new FireballProjectileEffect(dotDamage, fireTrail));
+        proj.AddEffect(new FireballProjectileEffect(dotDamage));
     }
 }

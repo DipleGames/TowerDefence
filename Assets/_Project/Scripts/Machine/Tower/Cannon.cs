@@ -25,12 +25,10 @@ public class Cannon : MonoBehaviour
         Projectile proj = PoolManager.Instance.GetProj();
         TowerModel tower = GetComponentInParent<TowerModel>();
 
-
         proj.transform.position = transform.position;
-
         float damage = tower.attackPower;
+        proj.InitProj(_currentTarget, damage); // 투사체 초기화
 
-        proj.InitProj(_currentTarget, damage);
         foreach (CoreParts part in tower.equippedPartsList) // 투사체에 효과 적용
         {
             part.ApplyProjectileEffect(proj);

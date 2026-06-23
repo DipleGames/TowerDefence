@@ -3,17 +3,20 @@ using UnityEngine;
 public class FireballProjectileEffect : IProjectileEffect
 {
     private float _dotDamage;
-    private GameObject _fireTrail;
 
-    public FireballProjectileEffect(float dotDamage, GameObject fireTrail)
+    public FireballProjectileEffect(float dotDamage)
     {
         _dotDamage = dotDamage;
-        _fireTrail = fireTrail;
     }
 
     public void Apply(MonsterController target, float baseDamage)
     {
         Debug.Log("파이어볼 적용");
-        Object.Instantiate(_fireTrail,target.transform.position,Quaternion.identity);
+
+        FireTrail fireTrail = PoolManager.Instance.GetFireTrail();
+        fireTrail.InitFireTrail(_dotDamage); // 불 잔상 초기화
+
+        fireTrail.transform.position = target.transform.position;
+        fireTrail.transform.rotation = Quaternion.identity;
     }
 }

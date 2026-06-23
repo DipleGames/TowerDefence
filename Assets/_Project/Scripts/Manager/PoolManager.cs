@@ -1,78 +1,62 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class PoolManager : SingleTon<PoolManager>
 {
+    [Header("Projectile")]
+    [SerializeField] private Projectile _projPrefab;
+    [SerializeField] private Transform _projParent;
+    [SerializeField] private int _projPoolSize = 32;
+
+    [Header("Hit Effect")]
+    [SerializeField] private HitEffect _hitEffectPrefab;
+    [SerializeField] private Transform _hitEffectParent;
+    [SerializeField] private int _hitEffectPoolSize = 32;
+
+    [Header("Fire Trail")]
+    [SerializeField] private FireTrail _fireTrailPrefab;
+    [SerializeField] private Transform _fireTrailParent;
+    [SerializeField] private int _fireTrailPoolSize = 32;
+
+    private ObjectPool<Projectile> _projPool;
+    private ObjectPool<HitEffect> _hitEffectPool;
+    private ObjectPool<FireTrail> _fireTrailPool;
+
     protected override void Awake()
     {
         base.Awake();
-        InitProjPool();
-        InithitEffectPool();
-    }
 
-    #region Projectile
-    [SerializeField] private GameObject _proj;
-    [SerializeField] private GameObject _projParent;
-    private Queue<Projectile> _projPool = new Queue<Projectile>();
-    private int _projPoolSize = 32;
-
-
-    void InitProjPool()
-    {
-        for(int i=0; i<_projPoolSize; i++)
-        {
-            Projectile projInstance = Instantiate(_proj, _projParent.transform).GetComponent<Projectile>();
-            projInstance.gameObject.SetActive(false);
-            _projPool.Enqueue(projInstance);
-        }
+        _projPool = new ObjectPool<Projectile>(_projPrefab, _projParent, _projPoolSize);
+        _hitEffectPool = new ObjectPool<HitEffect>(_hitEffectPrefab, _hitEffectParent, _hitEffectPoolSize);
+        _fireTrailPool = new ObjectPool<FireTrail>(_fireTrailPrefab, _fireTrailParent, _fireTrailPoolSize);
     }
 
     public Projectile GetProj()
     {
-        Projectile proj = _projPool.Dequeue();
-        proj.gameObject.SetActive(true);
-        return proj;
+        return _projPool.Get();
     }
 
     public void ReturnProj(Projectile proj)
     {
-        proj.gameObject.SetActive(false);
-        _projPool.Enqueue(proj);
+        _projPool.Return(proj);
     }
-    #endregion
 
-    #region hitEffect
-    [SerializeField] private ParticleSystem _hitEffect;
-    [SerializeField] private GameObject _hitEffectParent;
-    private Queue<ParticleSystem> _hitEffectPool = new Queue<ParticleSystem>();
-    private int _hitEffectPoolSize = 32;
-
-
-    void InithitEffectPool()
+    public HitEffect GetHitEffect()
     {
-        for(int i=0; i<_hitEffectPoolSize; i++)
-        {
-            ParticleSystem hitEffectInstance = Instantiate(_hitEffect, _hitEffectParent.transform).GetComponent<ParticleSystem>();
-            hitEffectInstance.gameObject.SetActive(false);
-            _hitEffectPool.Enqueue(hitEffectInstance);
-        }
+        return _hitEffectPool.Get();
     }
 
-    public ParticleSystem GetHitEffect()
+    public void ReturnHitEffect(HitEffect hitEffect)
     {
-        ParticleSystem hitEffect = _hitEffectPool.Dequeue();
-
-        hitEffect.gameObject.SetActive(true);
-        hitEffect.Clear();
-        hitEffect.Play();
-
-        return hitEffect;
+        _hitEffectPool.Return(hitEffect);
     }
 
-    public void ReturnHitEffect(ParticleSystem hitEffect)
+    public FireTrail GetFireTrail()
     {
-        hitEffect.gameObject.SetActive(false);
-        _hitEffectPool.Enqueue(hitEffect);
+        return _fireTrailPool.Get();
     }
-    #endregion
+
+    public void ReturnFireTrail(FireTrail fireTrail)
+    {
+        _fireTrailPool.Return(fireTrail);
+    }
 }

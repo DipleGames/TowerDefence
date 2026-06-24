@@ -9,7 +9,7 @@ public class FireballProjectileEffect : IProjectileEffect
         _dotDamage = dotDamage;
     }
 
-    public void Apply(MonsterController target, float baseDamage)
+    public void Apply(MonsterController target)
     {
         Debug.Log("파이어볼 적용");
 

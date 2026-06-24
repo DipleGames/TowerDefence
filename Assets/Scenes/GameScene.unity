@@ -13378,12 +13378,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ac68ca54134fe429f56e5d0283a570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _proj: {fileID: 2424234330936156495, guid: 6681bc4db20443141bfc6ac2152f0894, type: 3}
-  _projParent: {fileID: 154714156}
-  _hitEffect: {fileID: 4558408521707975080, guid: ce873261ef4ab124da8899f97a2f7c04, type: 3}
-  _hitEffectParent: {fileID: 803225586}
-  _fireTrail: {fileID: 1314492804210673520, guid: bb90e97121c7e61469ac96530cf6ff8b, type: 3}
-  _fireTrailParent: {fileID: 1340400532}
+  _projPrefab: {fileID: -2195039687356124586, guid: 6681bc4db20443141bfc6ac2152f0894, type: 3}
+  _projParent: {fileID: 154714157}
+  _projPoolSize: 32
+  _hitEffectPrefab: {fileID: -3732402719155045874, guid: ce873261ef4ab124da8899f97a2f7c04, type: 3}
+  _hitEffectParent: {fileID: 803225587}
+  _hitEffectPoolSize: 32
+  _fireTrailPrefab: {fileID: 7007989999136600038, guid: bb90e97121c7e61469ac96530cf6ff8b, type: 3}
+  _fireTrailParent: {fileID: 1340400533}
+  _fireTrailPoolSize: 32
+  _sparkPrefab: {fileID: 8901766884648291842, guid: 8971dabd975c1f646a14d4da8a4fe1d3, type: 3}
+  _sparkParent: {fileID: 1851820796}
+  _sparkPoolSize: 32
 --- !u!4 &296809215
 Transform:
   m_ObjectHideFlags: 0
@@ -13400,6 +13406,7 @@ Transform:
   - {fileID: 154714157}
   - {fileID: 803225587}
   - {fileID: 1340400533}
+  - {fileID: 1851820796}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &296814785
@@ -75750,6 +75757,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e9b7c648189f6a4eadd169052c39a04, type: 3}
+--- !u!1 &1851820795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1851820796}
+  m_Layer: 0
+  m_Name: SparkParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1851820796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851820795}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 296809215}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1852040225
 PrefabInstance:
   m_ObjectHideFlags: 0

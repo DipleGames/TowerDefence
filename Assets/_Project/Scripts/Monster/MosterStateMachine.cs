@@ -5,9 +5,14 @@ public class MonsterStateMachine : MonoBehaviour
 {
     public enum MonsterState { Idle }
     [SerializeField] private MonsterState _monsterState = MonsterState.Idle;
-    [SerializeField] private NavMeshAgent _agent;
+    public NavMeshAgent agent;
 
     private int _currentWayPointIndex = 1;   // 시작 웨이포인트
+
+    void Awake()
+    {
+        agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+    }
 
     void Start()
     {
@@ -27,10 +32,10 @@ public class MonsterStateMachine : MonoBehaviour
     void UpdateIdleState()
     {
         // 아직 경로 계산 중이면 패스
-        if (_agent.pathPending) return;
+        if (agent.pathPending) return;
 
         // 도착 판정
-        if (_agent.remainingDistance <= _agent.stoppingDistance + 0.5f)
+        if (agent.remainingDistance <= agent.stoppingDistance + 0.5f)
         {
             MoveToNextWayPoint();
             // 실제로 멈췄는지 한 번 더 체크
@@ -43,7 +48,7 @@ public class MonsterStateMachine : MonoBehaviour
 
     void MoveToCurrentWayPoint()
     {
-        _agent.SetDestination(WayPointManager.Instance.wayPoints[_currentWayPointIndex].transform.position);
+        agent.SetDestination(WayPointManager.Instance.wayPoints[_currentWayPointIndex].transform.position);
     }
 
     void MoveToNextWayPoint()

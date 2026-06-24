@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviour, IPoolable
         {
             foreach (IProjectileEffect effect in _effects)
             {
-                effect.Apply(monster, _damage);
+                effect.Apply(monster);
             }
         }
 

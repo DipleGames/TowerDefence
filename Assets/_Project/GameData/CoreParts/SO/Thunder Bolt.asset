@@ -19,3 +19,4 @@ MonoBehaviour:
   equipSFX: {fileID: 8300000, guid: 1cb4afea88263b74694b15cd4fc537db, type: 3}
   thunderDamage: 5
   stunTime: 0.5
+  spark: {fileID: 7604387627667347617, guid: 8971dabd975c1f646a14d4da8a4fe1d3, type: 3}

@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _monsterState: 0
-  _agent: {fileID: 1347562616165446980}
+  agent: {fileID: 1347562616165446980}
 --- !u!114 &-2122931817143144962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,8 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b03505235eefc0a4c88ea7efc3eb7b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 2896288429754730975}
   monsterModel: {fileID: -2122931817143144962}
+  monsterStateMachine: {fileID: 5051712525032908690}
+  _slider: {fileID: 2896288429754730975}
 --- !u!1 &4370712368182839181
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +316,7 @@ GameObject:
   - component: {fileID: 589050405197313293}
   m_Layer: 6
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

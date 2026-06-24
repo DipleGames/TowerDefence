@@ -1,10 +1,13 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MonsterController : MonoBehaviour, IDamageable
 {
-    [SerializeField] private Slider _slider;
+    [Header("참조")]
     public MonsterModel monsterModel;
+    public MonsterStateMachine monsterStateMachine;
+    [SerializeField] private Slider _slider;
     private Quaternion _initialRotation;
 
     void Awake()
@@ -29,7 +32,6 @@ public class MonsterController : MonoBehaviour, IDamageable
     }
 
 
-
     public void TakeDamage(float amount)
     {
         monsterModel.CurrentHP -= amount;
@@ -38,8 +40,34 @@ public class MonsterController : MonoBehaviour, IDamageable
         ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);
     }
 
-    public void Stun()
+    private Coroutine stunCoroutine;
+    public void ApplyStun(float duration)
     {
-        
+        var agent = monsterStateMachine.agent;
+
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh)
+            return;
+
+        if (stunCoroutine != null)
+            StopCoroutine(stunCoroutine);
+
+        stunCoroutine = StartCoroutine(StunRoutine(duration));
+    }
+
+    private IEnumerator StunRoutine(float duration)
+    {
+        var agent = monsterStateMachine.agent;
+
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh)
+            yield break;
+
+        agent.isStopped = true;
+
+        yield return new WaitForSeconds(duration);
+
+        if (agent != null && agent.enabled && agent.isOnNavMesh)
+            agent.isStopped = false;
+
+        stunCoroutine = null;
     }
 }

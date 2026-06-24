@@ -11,9 +11,12 @@ public class ThunderProjectileEffect : IProjectileEffect
         _stunTime = stunTime;
     }
 
-    public void Apply(MonsterController target, float baseDamage)
+    public void Apply(MonsterController target)
     {
-        target.TakeDamage(_thunderDamage);
-        Debug.Log($"효과가 적용되서{_thunderDamage}의 추가데미지");
+        Spark spark = PoolManager.Instance.GetSpark();
+        spark.InitSpark(_thunderDamage);
+        target.ApplyStun(_stunTime);
+        spark.transform.position = target.transform.position;
+        spark.transform.rotation = Quaternion.identity;
     }
 }

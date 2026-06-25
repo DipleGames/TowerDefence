@@ -6,60 +6,60 @@ public class CorePartsManager : SingleTon<CorePartsManager>
 {
 
     [Header("코어파츠 리스트")]
-    public List<CoreParts> corePartsList = new();
+    public List<CorePart> corePartList = new();
 
     [Header("보유하고있는 코어파츠 리스트")]
-    public List<CoreParts> ownedCorePartsList = new();
+    public List<CorePart> ownedCorePartList = new();
 
 
     HashSet<int> ranHash = new();
-    List<CoreParts> currentCorePartsList = new();
+    List<CorePart> currentCorePartList = new();
     public void OnClickedCorePartsDrawBtn()
     {
-        bool isActive = ViewManager.Instance.corePartsView.corePartsPanel.activeSelf;
-        ViewManager.Instance.corePartsView.corePartsPanel.SetActive(!isActive);
+        bool isActive = ViewManager.Instance.corePartsView.corePartPanel.activeSelf;
+        ViewManager.Instance.corePartsView.corePartPanel.SetActive(!isActive);
 
         GameManager.Instance.SetPause(!isActive);
 
         ranHash.Clear();
-        currentCorePartsList.Clear();
+        currentCorePartList.Clear();
         while(ranHash.Count < 3)
         {
-            int ran = Random.Range(0, corePartsList.Count);
+            int ran = Random.Range(0, corePartList.Count);
             ranHash.Add(ran);
         }
 
         foreach(int ran in ranHash)
         {
-            currentCorePartsList.Add(corePartsList[ran]);
+            currentCorePartList.Add(corePartList[ran]);
         }
 
-        SetCorePartsBtn(currentCorePartsList);
+        SetCorePartsBtn(currentCorePartList);
     }
 
-    public void SetCorePartsBtn(List<CoreParts> corePartsList)
+    public void SetCorePartsBtn(List<CorePart> corePartsList)
     {
         for(int i=0; i<3; i++)
         {
-            ViewManager.Instance.corePartsView.corePartsSelectBtnList[i].currentCoreParts = corePartsList[i];
+            ViewManager.Instance.corePartsView.corePartSelectBtnList[i].currentCorePart = corePartsList[i];
         }
     }
 
     public void SetOwnedCorePartsList()
     {
-        for (int i = 0; i < ownedCorePartsList.Count; i++)
+        for (int i = 0; i < ownedCorePartList.Count; i++)
         {
-            if(ownedCorePartsList.Count > 6)
+            if(ownedCorePartList.Count > 6)
             {
                 Debug.Log("다음페이지");
                 return;
             }
             Transform slot = ViewManager.Instance.corePartsView.ownedCorePartsListPanel.transform.GetChild(i);
 
-            CorePartsSlot corePartsSlot = slot.GetComponent<CorePartsSlot>();
+            CorePartSlot corePartsSlot = slot.GetComponent<CorePartSlot>();
 
-            corePartsSlot.SetCorePartsSlot(ownedCorePartsList[i]);
-            corePartsSlot.corePartsIcon.sprite = corePartsSlot.currentCoreParts.coreImg;
+            corePartsSlot.SetCorePartsSlot(ownedCorePartList[i]);
+            corePartsSlot.corePartsIcon.sprite = corePartsSlot.currentCorePart.coreImg;
             if(corePartsSlot.corePartsIcon != null)
             { 
                 corePartsSlot.corePartsIcon.gameObject.SetActive(true);

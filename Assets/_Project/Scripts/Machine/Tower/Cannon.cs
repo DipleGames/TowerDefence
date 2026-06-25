@@ -29,7 +29,7 @@ public class Cannon : MonoBehaviour
         float damage = tower.attackPower;
         proj.InitProj(_currentTarget, damage); // 투사체 초기화
 
-        foreach (CoreParts part in tower.equippedPartsList) // 투사체에 효과 적용
+        foreach (CorePart part in tower.equippedPartList) // 투사체에 효과 적용
         {
             part.ApplyProjectileEffect(proj);
         }

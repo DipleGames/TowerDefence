@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "CoreParts/Fireball")]
-public class Fireball : CoreParts
+public class Fireball : CorePart
 {
     [SerializeField] private float dotDamage = 5f;
     [SerializeField] private GameObject fireTrail;

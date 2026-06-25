@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class CoreParts : ScriptableObject
+public abstract class CorePart : ScriptableObject
 {
     [Header("코어 정보")]
     public int coreID;

@@ -24,6 +24,9 @@ public class TowerView : MonoBehaviour
     public Text towerAttackPowerText;
     public Text towerAttackSpeedText;
 
+    [Header("코어파츠 관련")]
+    public Image[] EquippedCorePartImages;
+
     #region 연료 관련 메서드
     Coroutine fuelCoroutine;
     public void StartFuelView(TowerStateMachine tower)
@@ -139,6 +142,23 @@ public class TowerView : MonoBehaviour
             }
         }
         repairPowerCostText.text = $"{cost}";
+    }
+    #endregion
+
+    #region  코어파츠 관련 메서드
+    public void UpdateCorePartImage(TowerModel towerModel)
+    {
+        for(int i=0; i<EquippedCorePartImages.Length; i++)
+        {
+            EquippedCorePartImages[i].sprite = null;
+            EquippedCorePartImages[i].enabled = false;
+        }
+
+        for(int i=0; i<towerModel.equippedPartList.Count; i++)
+        {
+            EquippedCorePartImages[i].enabled = true;
+            EquippedCorePartImages[i].sprite = towerModel.equippedPartList[i].coreImg;
+        }
     }
     #endregion
 }

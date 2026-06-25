@@ -4,10 +4,12 @@ public class TowerInteraction : MonoBehaviour
 {
     public GameObject uiRoot;
     private TowerStateMachine _towerStateMachine;
+    private TowerModel _towerModel;
 
     void Awake()
     {
         _towerStateMachine = GetComponent<TowerStateMachine>();
+        _towerModel = GetComponent<TowerModel>();
     }
 
     void Update()
@@ -37,6 +39,7 @@ public class TowerInteraction : MonoBehaviour
         HUDManager.Instance.SwitchHUD(ViewManager.Instance.towerView.towerStatePanel, true);
         ViewManager.Instance.towerView.UpdateTowerStatText(_towerStateMachine);
         ViewManager.Instance.towerView.UpdatePossibilityOfPowerDownText(_towerStateMachine);
+        ViewManager.Instance.towerView.UpdateCorePartImage(_towerModel);
         ViewManager.Instance.towerView.StartFuelView(_towerStateMachine);
         ViewManager.Instance.towerView.StartPowerView(_towerStateMachine);
     }

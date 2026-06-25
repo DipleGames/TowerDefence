@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CorePartsDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class CorePartDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private RectTransform _rectTransform;
     private Canvas _canvas;
-    private CorePartsSlot _corePartsSlot;
+    private CorePartSlot _corePartSlot;
 
     private Vector3 startPos;
 
@@ -13,7 +13,7 @@ public class CorePartsDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandl
     {
         _rectTransform = GetComponent<RectTransform>();
         _canvas = GetComponentInParent<Canvas>();
-        _corePartsSlot = GetComponentInParent<CorePartsSlot>();
+        _corePartSlot = GetComponentInParent<CorePartSlot>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -36,8 +36,8 @@ public class CorePartsDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandl
 
             if (tower != null)
             {
-                tower.EquipCorePart(_corePartsSlot.currentCoreParts);
-                _corePartsSlot.ReleaseCorePartsSlot();
+                tower.EquipCorePart(_corePartSlot.currentCorePart);
+                _corePartSlot.ReleaseCorePartsSlot();
                 // 장착 처리
                 // tower.EquipCorePart(...);
             }

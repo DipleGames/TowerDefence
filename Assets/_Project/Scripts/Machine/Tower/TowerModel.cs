@@ -12,13 +12,13 @@ public class TowerModel : MonoBehaviour
     public float maxFuelCapacity; // 최종 연료 최대양
 
     [Header("타워에 장착된 파츠")]
-    public List<CoreParts> equippedPartsList = new();
+    public List<CorePart> equippedPartList = new();
 
-    public void EquipCorePart(CoreParts corePart)
+    public void EquipCorePart(CorePart corePart)
     {
         if (corePart == null) return;
 
-        equippedPartsList.Add(corePart);
+        equippedPartList.Add(corePart);
 
         corePart.OnEquip(this);
         StartCoroutine(corePart.EquipCoroutine(this));
@@ -27,6 +27,6 @@ public class TowerModel : MonoBehaviour
 
 
         AudioManager.Instance.PlaySFX(corePart.equipSFX);
-        CorePartsManager.Instance.ownedCorePartsList.Remove(corePart);
+        CorePartsManager.Instance.ownedCorePartList.Remove(corePart);
     }
 }

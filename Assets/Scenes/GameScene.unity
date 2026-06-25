@@ -4058,8 +4058,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebaed22a0a6200640961e6e4778907fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  corePartPanel: {fileID: 0}
-  corePartSelectBtnList: []
+  corePartPanel: {fileID: 1957332271}
+  corePartSelectBtnList:
+  - {fileID: 105557899}
+  - {fileID: 1976629341}
+  - {fileID: 463032353}
   ownedCorePartsListPanel: {fileID: 1917568731}
 --- !u!1 &92240409
 GameObject:
@@ -11089,7 +11092,7 @@ GameObject:
   - component: {fileID: 243429253}
   - component: {fileID: 243429252}
   m_Layer: 0
-  m_Name: CorePartsManager
+  m_Name: CorePartManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11107,7 +11110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8980a739d704d3347b8eb77aec45ca67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  corePartList: []
+  corePartList:
+  - {fileID: 11400000, guid: 25a031f84e2557148bee68acb72ea95d, type: 2}
+  - {fileID: 11400000, guid: f18418590c5ac1d468eee903b9db52cd, type: 2}
+  - {fileID: 11400000, guid: e01b4bb37b4b6fb42b8e4a2b1fd9cfb5, type: 2}
   ownedCorePartList: []
 --- !u!4 &243429253
 Transform:
@@ -13529,6 +13535,9 @@ MonoBehaviour:
   _fireTrailPrefab: {fileID: 7007989999136600038, guid: bb90e97121c7e61469ac96530cf6ff8b, type: 3}
   _fireTrailParent: {fileID: 1340400533}
   _fireTrailPoolSize: 32
+  _iceTrailPrefab: {fileID: 4135388661398622408, guid: c1c6c28a96ea69b428af4ad252f03d91, type: 3}
+  _iceTrailParent: {fileID: 357055332}
+  _iceTrailPoolSize: 32
   _sparkPrefab: {fileID: 8901766884648291842, guid: 8971dabd975c1f646a14d4da8a4fe1d3, type: 3}
   _sparkParent: {fileID: 1851820796}
   _sparkPoolSize: 32
@@ -13548,6 +13557,7 @@ Transform:
   - {fileID: 154714157}
   - {fileID: 803225587}
   - {fileID: 1340400533}
+  - {fileID: 357055332}
   - {fileID: 1851820796}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14634,7 +14644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &322199167
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15879,6 +15889,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ce0620d7f0d4e544be855453f2a9dcd, type: 3}
+--- !u!1 &357055331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 357055332}
+  m_Layer: 0
+  m_Name: IceTrailParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &357055332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357055331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 296809215}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &359464793 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4094345211672303950, guid: 9ce0620d7f0d4e544be855453f2a9dcd, type: 3}
@@ -17079,10 +17120,10 @@ RectTransform:
   - {fileID: 1716953368}
   m_Father: {fileID: 1295573952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 112, y: -35}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &404706337
 MonoBehaviour:
@@ -21076,10 +21117,10 @@ RectTransform:
   - {fileID: 113443517}
   m_Father: {fileID: 1295573952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 44, y: -35}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515221353
 MonoBehaviour:
@@ -40746,10 +40787,10 @@ RectTransform:
   - {fileID: 1665118136}
   m_Father: {fileID: 1295573952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 180, y: -35}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010080602
 MonoBehaviour:
@@ -46517,10 +46558,10 @@ RectTransform:
   - {fileID: 1763075533}
   m_Father: {fileID: 1295573952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 248, y: -35}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1128771086
 MonoBehaviour:
@@ -48473,10 +48514,10 @@ RectTransform:
   - {fileID: 39076227}
   m_Father: {fileID: 1295573952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 316, y: -35}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1160989926
 MonoBehaviour:
@@ -82876,7 +82917,7 @@ GameObject:
   - component: {fileID: 2003694827}
   - component: {fileID: 2003694826}
   m_Layer: 5
-  m_Name: CorePartsPanel
+  m_Name: CorePartPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

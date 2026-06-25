@@ -15,7 +15,7 @@ MonoBehaviour:
   coreID: 100
   coreName: "\uC36C\uB354\uBCFC\uD2B8"
   coreDesc: "\uC36C\uB354\uBCFC\uD2B8\uC785\uB2C8\uB2E4."
-  coreImg: {fileID: 21300000, guid: 725c9b32d73b8db46bfeb9e0787bb23d, type: 3}
+  coreImg: {fileID: 21300000, guid: f1dee71f7b295a745bfcc8d8081ae16f, type: 3}
   equipSFX: {fileID: 8300000, guid: 1cb4afea88263b74694b15cd4fc537db, type: 3}
   thunderDamage: 5
   stunTime: 0.5

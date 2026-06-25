@@ -17,6 +17,11 @@ public class PoolManager : SingleTon<PoolManager>
     [SerializeField] private Transform _fireTrailParent;
     [SerializeField] private int _fireTrailPoolSize = 32;
 
+    [Header("Ice Trail")]
+    [SerializeField] private IceTrail _iceTrailPrefab;
+    [SerializeField] private Transform _iceTrailParent;
+    [SerializeField] private int _iceTrailPoolSize = 32;
+
     [Header("Spark")]
     [SerializeField] private Spark _sparkPrefab;
     [SerializeField] private Transform _sparkParent;
@@ -26,6 +31,7 @@ public class PoolManager : SingleTon<PoolManager>
     private ObjectPool<Projectile> _projPool;
     private ObjectPool<HitEffect> _hitEffectPool;
     private ObjectPool<FireTrail> _fireTrailPool;
+    private ObjectPool<IceTrail> _iceTrailPool;
     private ObjectPool<Spark> _sparkPool;
 
     protected override void Awake()
@@ -35,6 +41,7 @@ public class PoolManager : SingleTon<PoolManager>
         _projPool = new ObjectPool<Projectile>(_projPrefab, _projParent, _projPoolSize);
         _hitEffectPool = new ObjectPool<HitEffect>(_hitEffectPrefab, _hitEffectParent, _hitEffectPoolSize);
         _fireTrailPool = new ObjectPool<FireTrail>(_fireTrailPrefab, _fireTrailParent, _fireTrailPoolSize);
+        _iceTrailPool = new ObjectPool<IceTrail>(_iceTrailPrefab, _iceTrailParent, _iceTrailPoolSize);
         _sparkPool = new ObjectPool<Spark>(_sparkPrefab, _sparkParent, _sparkPoolSize);
     }
 
@@ -66,6 +73,16 @@ public class PoolManager : SingleTon<PoolManager>
     public void ReturnFireTrail(FireTrail fireTrail)
     {
         _fireTrailPool.Return(fireTrail);
+    }
+
+    public IceTrail GetIceTrail()
+    {
+        return _iceTrailPool.Get();
+    }
+
+    public void ReturnIceTrail(IceTrail iceTrail)
+    {
+        _iceTrailPool.Return(iceTrail);
     }
 
     public Spark GetSpark()

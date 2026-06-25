@@ -26,8 +26,8 @@ public class Cannon : MonoBehaviour
         TowerModel tower = GetComponentInParent<TowerModel>();
 
         proj.transform.position = transform.position;
-        float damage = tower.attackPower;
-        proj.InitProj(_currentTarget, damage); // 투사체 초기화
+        _damage = tower.attackPower;
+        proj.InitProj(_currentTarget, _damage); // 투사체 초기화
 
         foreach (CorePart part in tower.equippedPartList) // 투사체에 효과 적용
         {

@@ -27,8 +27,7 @@ public class FireTrail : MonoBehaviour, IPoolable
 
     void OnTriggerStay(Collider other)
     {
-        MonsterController monster =
-            other.GetComponentInParent<MonsterController>();
+        MonsterController monster = other.GetComponentInParent<MonsterController>();
 
         if (monster == null)
             return;
@@ -47,8 +46,7 @@ public class FireTrail : MonoBehaviour, IPoolable
 
     void OnTriggerExit(Collider other)
     {
-        MonsterController monster =
-            other.GetComponentInParent<MonsterController>();
+        MonsterController monster = other.GetComponentInParent<MonsterController>();
 
         if (monster != null)
             stayTimeDic.Remove(monster);

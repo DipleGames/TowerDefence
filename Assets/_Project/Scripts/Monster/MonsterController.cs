@@ -9,6 +9,7 @@ public class MonsterController : MonoBehaviour, IDamageable
     public MonsterStateMachine monsterStateMachine;
     [SerializeField] private Slider _slider;
     private Quaternion _initialRotation;
+    private float originSpeed;
 
     void Awake()
     {
@@ -29,6 +30,7 @@ public class MonsterController : MonoBehaviour, IDamageable
     {
         monsterModel.CurrentHP = monsterModel.maxHP;
         ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);
+        originSpeed = monsterStateMachine.agent.speed;
     }
 
 
@@ -40,6 +42,8 @@ public class MonsterController : MonoBehaviour, IDamageable
         ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);
     }
 
+
+    #region  Stun
     private Coroutine stunCoroutine;
     public void ApplyStun(float duration)
     {
@@ -70,4 +74,17 @@ public class MonsterController : MonoBehaviour, IDamageable
 
         stunCoroutine = null;
     }
+    #endregion
+
+    #region  Slow
+    public void ApplySlow(float multiplier)
+    {
+        monsterStateMachine.agent.speed = originSpeed * multiplier;
+    }
+
+    public void RemoveSlow()
+    {
+        monsterStateMachine.agent.speed = originSpeed;
+    }
+    #endregion
 }

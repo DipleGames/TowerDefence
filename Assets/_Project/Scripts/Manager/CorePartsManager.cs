@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,6 +43,11 @@ public class CorePartsManager : SingleTon<CorePartsManager>
         for(int i=0; i<3; i++)
         {
             ViewManager.Instance.corePartsView.corePartSelectBtnList[i].currentCorePart = corePartsList[i];
+            Image corePartImg = ViewManager.Instance.corePartsView.corePartSelectBtnList[i].gameObject.transform.GetChild(0).GetComponent<Image>();
+            TextMeshProUGUI corePartDesc = ViewManager.Instance.corePartsView.corePartSelectBtnList[i].gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+
+            corePartImg.sprite = ViewManager.Instance.corePartsView.corePartSelectBtnList[i].currentCorePart.coreImg;
+            corePartDesc.text = ViewManager.Instance.corePartsView.corePartSelectBtnList[i].currentCorePart.coreDesc;
         }
     }
 

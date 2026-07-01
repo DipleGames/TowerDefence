@@ -115,6 +115,7 @@ public class TowerManager : SingleTon<TowerManager>
     #region Augment
     public float AttackPowerRateBonus { get; private set; }
     public float AttackSpeedMultiplier { get; private set; } = 1f;
+    public float CriticalProbBonus { get; private set; }
     public float FuelIncreaseRateBonus { get; private set; }
     public float ReducedPowerOutageChanceRateBonus { get; private set; }
 
@@ -126,6 +127,11 @@ public class TowerManager : SingleTon<TowerManager>
     public void AddAttackSpeedBonus(float value)
     {
         AttackSpeedMultiplier *= value;
+    }
+
+    public void AddCriticalProbBonus(float value)
+    {
+        CriticalProbBonus += value;
     }
 
     public void AddFuelIncreaseBonus(float value)

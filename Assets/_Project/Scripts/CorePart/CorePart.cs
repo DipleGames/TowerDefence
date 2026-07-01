@@ -1,4 +1,5 @@
 using System.Collections;
+using System.ComponentModel;
 using UnityEngine;
 
 public abstract class CorePart : ScriptableObject
@@ -6,6 +7,8 @@ public abstract class CorePart : ScriptableObject
     [Header("코어 정보")]
     public int coreID;
     public string coreName;
+
+    [TextArea(3, 10)]
     public string coreDesc;
     public Sprite coreImg;
     public AudioClip equipSFX;

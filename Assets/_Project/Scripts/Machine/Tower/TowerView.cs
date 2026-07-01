@@ -23,6 +23,7 @@ public class TowerView : MonoBehaviour
     public Text towerLevelText;
     public Text towerAttackPowerText;
     public Text towerAttackSpeedText;
+    public Text towerCriticalProbText;
 
     [Header("코어파츠 관련")]
     public Image[] EquippedCorePartImages;
@@ -113,6 +114,7 @@ public class TowerView : MonoBehaviour
         towerLevelText.text = $"Level : {towerStateMachine.towerController.towerModel.towerInfo.towerLv}";
         towerAttackPowerText.text = $"공격력 : {towerStateMachine.towerController.towerModel.attackPower}";
         towerAttackSpeedText.text = $"공격속도 : {towerStateMachine.towerController.towerModel.attackSpeed}";
+        towerCriticalProbText.text = $"치명타 확률 : {towerStateMachine.towerController.towerModel.criticalProb * 100}%";
     }
     #endregion
 

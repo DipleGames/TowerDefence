@@ -29,6 +29,7 @@ public class MonsterController : MonoBehaviour, IDamageable
     public void InitMonster()
     {
         monsterModel.CurrentHP = monsterModel.maxHP;
+        monsterModel.CurrentArmor = monsterModel.maxArmor;
         ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);
         originSpeed = monsterStateMachine.agent.speed;
     }
@@ -36,7 +37,8 @@ public class MonsterController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float amount)
     {
-        monsterModel.CurrentHP -= amount;
+        float realDamage = amount / monsterModel.CurrentArmor;
+        monsterModel.CurrentHP -= realDamage;
         HitEffect hitEffect = PoolManager.Instance.GetHitEffect();
         hitEffect.transform.position = transform.position;
         ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);

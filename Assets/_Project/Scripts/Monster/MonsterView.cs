@@ -5,6 +5,6 @@ public class MonsterView : MonoBehaviour
 {
     public void UpdateHPBar(MonsterModel monsterModel, Slider slider)
     {
-        slider.value = monsterModel.CurrentHP / monsterModel.maxHP;
+        slider.value = monsterModel.CurrentHP / MonsterDatabase.Instance.GetMonsterData(GameManager.Instance.currWave).HP;
     }
 }

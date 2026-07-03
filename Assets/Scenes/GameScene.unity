@@ -83074,8 +83074,9 @@ GameObject:
   - component: {fileID: 2003698278}
   - component: {fileID: 2003698277}
   - component: {fileID: 2003698279}
+  - component: {fileID: 2003698280}
   m_Layer: 0
-  m_Name: MonsterSpawner
+  m_Name: MonsterManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83124,6 +83125,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factory: {fileID: 2003698277}
   spawnDelay: 1
+--- !u!114 &2003698280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003698276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f9e4fc34601c34ebec8612e05698fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2004492628 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4094345211672303950, guid: 9ce0620d7f0d4e544be855453f2a9dcd, type: 3}
@@ -88717,6 +88730,7 @@ SceneRoots:
   - {fileID: 1025355897}
   - {fileID: 2075216103}
   - {fileID: 243429253}
+  - {fileID: 2003698278}
   - {fileID: 585350079}
   - {fileID: 1596930337}
   - {fileID: 1508476107}
@@ -88724,6 +88738,5 @@ SceneRoots:
   - {fileID: 1756501788}
   - {fileID: 810351940}
   - {fileID: 498946642}
-  - {fileID: 2003698278}
   - {fileID: 541513205}
   - {fileID: 1655820699}

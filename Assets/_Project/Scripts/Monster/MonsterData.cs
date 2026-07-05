@@ -6,4 +6,5 @@ public class MonsterData
     public float HP;
     public float Armor;
     public float Speed;
+    public int Reward;
 }

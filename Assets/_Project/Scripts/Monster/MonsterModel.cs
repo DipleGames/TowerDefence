@@ -16,6 +16,7 @@ public class MonsterModel : MonoBehaviour
             _currentHP = value;
             if(_currentHP <= 0f)
             {
+                GoldManager.Instance.AddGold(reward);
                 Destroy(gameObject);
             }
         }
@@ -33,4 +34,7 @@ public class MonsterModel : MonoBehaviour
             _currentArmor = nv;
         }
     }
+
+    [Header("보상")]
+    public int reward;
 }

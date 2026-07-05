@@ -37,6 +37,7 @@ public class MonsterDatabase : SingleTon<MonsterDatabase>
             data.HP = float.Parse(values[2]);
             data.Armor = float.Parse(values[3]);
             data.Speed = float.Parse(values[4]);
+            data.Reward = int.Parse(values[5]);
 
             _monsterDict.Add(data.Wave, data);
         }

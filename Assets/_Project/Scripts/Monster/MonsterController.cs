@@ -30,6 +30,7 @@ public class MonsterController : MonoBehaviour, IDamageable
     {
         monsterModel.CurrentHP = MonsterDatabase.Instance.GetMonsterData(GameManager.Instance.currWave).HP;
         monsterModel.CurrentArmor = MonsterDatabase.Instance.GetMonsterData(GameManager.Instance.currWave).Armor;
+        monsterModel.reward = MonsterDatabase.Instance.GetMonsterData(GameManager.Instance.currWave).Reward;
         ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);
         originSpeed = monsterStateMachine.agent.speed;
     }

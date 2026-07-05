@@ -36,6 +36,12 @@ public class CorePartDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandle
 
             if (tower != null)
             {
+                if(tower.equippedPartList.Contains(_corePartSlot.currentCorePart))
+                {
+                    _rectTransform.position = startPos;
+                    return;
+                }
+
                 tower.EquipCorePart(_corePartSlot.currentCorePart);
                 _corePartSlot.ReleaseCorePartsSlot();
                 // 장착 처리

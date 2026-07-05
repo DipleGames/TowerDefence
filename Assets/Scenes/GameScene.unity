@@ -87309,6 +87309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiningRig
       objectReference: {fileID: 0}
+    - target: {fileID: 4690054338264340546, guid: 211902ed5d2d63049aa4a3e88899c249, type: 3}
+      propertyPath: output
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4974642386879553346, guid: 211902ed5d2d63049aa4a3e88899c249, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5

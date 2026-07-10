@@ -36,7 +36,7 @@ public class CorePartDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandle
 
             if (tower != null)
             {
-                if(tower.equippedPartList.Contains(_corePartSlot.currentCorePart))
+                if(tower.equippedPartList.Contains(_corePartSlot.currentCorePart)) // 이미 동일 코어파츠가 장착되어있을때 예외처리
                 {
                     _rectTransform.position = startPos;
                     return;

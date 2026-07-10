@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class MonsterDatabase : SingleTon<MonsterDatabase>
 {
     private Dictionary<int, MonsterData> _monsterDict = new();
+    public int monsterCount = -1;
 
     protected override  void Awake()
     {
@@ -41,7 +42,7 @@ public class MonsterDatabase : SingleTon<MonsterDatabase>
 
             _monsterDict.Add(data.Wave, data);
         }
-
+        monsterCount = _monsterDict.Count;
         Debug.Log($"Monster Loaded : {_monsterDict.Count}");
     }
 }

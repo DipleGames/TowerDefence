@@ -14,6 +14,7 @@ public class HUDManager : SingleTon<HUDManager>
     public Text currGoldText02;
 
     [Header("게임 진행 관련 UI")]
+    public GameObject gameoverPanel;
     public Text gameStateText;
     public Text gameStateTimeText;
     public GameObject skipBtn;
@@ -73,6 +74,10 @@ public class HUDManager : SingleTon<HUDManager>
             case GameState.Prepare:
                 gameStateText.text = $"{gameState}";
                 skipBtn.SetActive(true);
+                break;
+            case GameState.GameOver:
+                gameStateText.text = $"{gameState}";
+                skipBtn.SetActive(false);
                 break;
         }
     }

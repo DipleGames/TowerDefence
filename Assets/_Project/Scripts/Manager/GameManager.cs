@@ -118,8 +118,16 @@ public class GameManager : SingleTon<GameManager>
             StopStateRoutine();
             StopTimerRoutine();
 
+            if(currWave == MonsterDatabase.Instance.monsterCount) // 만약에 지금 웨이브가 몬스터수랑 같은데 웨이브가 끝났으면 게임이 종료된거임
+            {
+                gameState = GameState.GameOver;
+            }
+
             if (gameState == GameState.GameOver)
+            {
+                HUDManager.Instance.SwitchHUD(HUDManager.Instance.gameoverPanel, true);
                 yield break;
+            }
 
             // 2) Prepare
             gameState = GameState.Prepare;

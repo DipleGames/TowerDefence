@@ -114,35 +114,40 @@ public class TowerManager : SingleTon<TowerManager>
 
     #region Augment
     public float AttackPowerRateBonus { get; private set; }
-    public float AttackSpeedMultiplier { get; private set; } = 1f;
-    public float CriticalProbBonus { get; private set; }
-    public float FuelIncreaseRateBonus { get; private set; }
-    public float ReducedPowerOutageChanceRateBonus { get; private set; }
-
     public void AddAttackPowerBonus(float value)
     {
         AttackPowerRateBonus += value;
     }
 
+    public float AttackSpeedMultiplier { get; private set; } = 1f;
     public void AddAttackSpeedBonus(float value)
     {
         AttackSpeedMultiplier *= value;
     }
 
+    public float CriticalProbBonus { get; private set; }
     public void AddCriticalProbBonus(float value)
     {
         CriticalProbBonus += value;
     }
 
+    public float FuelIncreaseRateBonus { get; private set; }
     public void AddFuelIncreaseBonus(float value)
     {
         FuelIncreaseRateBonus += value;
     }
 
+    public float ReducedPowerOutageChanceRateBonus { get; private set; }
     public void AddReducedPowerOutageChanceRateBonus(float value)
     {
         ReducedPowerOutageChanceRateBonus += value;
     }
-    
+
+    public bool IsGlacialAugment { get; private set; } = false;
+    public void ApplyGlacialAugment()
+    {
+        IsGlacialAugment = true;
+    }
+
     #endregion
 }

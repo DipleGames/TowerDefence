@@ -24,16 +24,12 @@ public class Cannon : MonoBehaviour
     {
         Projectile proj = PoolManager.Instance.GetProj();
         TowerModel tower = GetComponentInParent<TowerModel>();
+        MonsterController targetMC = _currentTarget.GetComponent<MonsterController>();
 
         proj.transform.position = transform.position;
         _damage = tower.attackPower;
 
-        int ran = Random.Range(0,100);
-
-        if(ran < tower.criticalProb * 100) // 크리티컬이 터지면 데미지 두배
-        {
-            _damage *= 2;
-        }
+        _damage = DamageCalculator(tower, targetMC, _damage);
 
         proj.InitProj(_currentTarget, _damage); // 투사체 초기화
 
@@ -41,6 +37,22 @@ public class Cannon : MonoBehaviour
         {
             part.ApplyProjectileEffect(proj);
         }
+    }
+
+    public float DamageCalculator(TowerModel tower, MonsterController targetMC, float damage)
+    {
+        int ran = Random.Range(0,100);
+        if(ran < tower.criticalProb * 100) // 크리티컬이 터지면 데미지 두배
+        {
+            damage *= 2;
+        }
+
+        if(targetMC.isGlacial && TowerManager.Instance.IsGlacialAugment)
+        {
+            damage *= 1.5f;
+        }
+
+        return damage;
     }
   
 }

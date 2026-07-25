@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerDragHandler : MonoBehaviour
@@ -118,7 +119,7 @@ public class TowerDragHandler : MonoBehaviour
 
         if (CanMerge(_tower, otherTower))
         {
-            Merge(targetNode, otherTower);
+            Merge(targetNode, _tower, otherTower);
         }
         else
         {
@@ -154,7 +155,7 @@ public class TowerDragHandler : MonoBehaviour
         return canMerge;
     }
 
-    private void Merge(FieldNode node, TowerController otherTower)
+    private void Merge(FieldNode node, TowerController tower, TowerController otherTower)
     {
         AudioManager.Instance.PlaySFX(towerMergeSFX);
 
@@ -179,6 +180,17 @@ public class TowerDragHandler : MonoBehaviour
             Quaternion.identity
         ).GetComponent<TowerController>();
         upgradeTower.transform.SetParent(FieldGridManager.Instance.objectTilemap.transform);
+        
+        foreach (var part in tower.towerModel.equippedPartList)
+        {
+            upgradeTower.towerModel.EquipCorePart(part,true);
+        }
+
+        foreach (var part in otherTower.towerModel.equippedPartList)
+        {
+            upgradeTower.towerModel.EquipCorePart(part,true);
+        }
+
         TowerManager.Instance.towerList.Add(upgradeTower);
         grid.SetTower(node, upgradeTower);
 

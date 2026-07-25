@@ -85,8 +85,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001a0f682a0e91b4ea17662c2dc10b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  monsterID: 0
   _currentHP: 0
+  _currentArmor: 0
+  reward: 0
 --- !u!114 &3164035529980498835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,10 +315,9 @@ GameObject:
   - component: {fileID: 6961376101048374916}
   - component: {fileID: 8833828752251460403}
   - component: {fileID: 7927612122824779659}
-  - component: {fileID: 589050405197313293}
   m_Layer: 6
   m_Name: Cube
-  m_TagString: Monster
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -389,27 +390,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &589050405197313293
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5619548640771519008}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5714853915885222115
 GameObject:
   m_ObjectHideFlags: 0

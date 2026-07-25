@@ -7,11 +7,11 @@ public abstract class CorePart : ScriptableObject
     [Header("코어 정보")]
     public int coreID;
     public string coreName;
-
-    [TextArea(3, 10)]
-    public string coreDesc;
     public Sprite coreImg;
     public AudioClip equipSFX;
+
+    [TextArea(3, 10)]
+    public abstract string coreDescription { get; }
 
     // 탈부착시 능력치 증가 파츠
     public virtual void OnEquip(TowerModel tower) { }

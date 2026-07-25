@@ -33,7 +33,10 @@ public class IceTrail : MonoBehaviour, IPoolable
     void OnTriggerExit(Collider other)
     {
         MonsterController monster = other.GetComponentInParent<MonsterController>();
-        monster.RemoveSlow();
+        if(monster != null)
+        {
+            monster.RemoveSlow();
+        }
     }
 
     public void OnSpawnFromPool()

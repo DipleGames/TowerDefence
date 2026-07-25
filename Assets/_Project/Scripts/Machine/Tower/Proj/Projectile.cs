@@ -48,6 +48,7 @@ public class Projectile : MonoBehaviour, IPoolable
         if (damageable != null)
         {
             damageable.TakeDamage(_damage);
+            Debug.Log(_damage);
         }
 
         MonsterController monster = other.GetComponentInParent<MonsterController>();

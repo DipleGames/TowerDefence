@@ -605,7 +605,9 @@ MonoBehaviour:
   towerInfo: {fileID: 11400000, guid: 7155b45165c69e942baeecca17ffcd93, type: 2}
   attackPower: 0
   attackSpeed: 0
+  criticalProb: 0
   maxFuelCapacity: 0
+  equippedPartList: []
 --- !u!114 &2998761206172094858
 MonoBehaviour:
   m_ObjectHideFlags: 0

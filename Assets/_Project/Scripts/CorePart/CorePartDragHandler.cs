@@ -42,7 +42,7 @@ public class CorePartDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandle
                     return;
                 }
 
-                tower.EquipCorePart(_corePartSlot.currentCorePart);
+                tower.EquipCorePart(_corePartSlot.currentCorePart, false);
                 _corePartSlot.ReleaseCorePartsSlot();
                 // 장착 처리
                 // tower.EquipCorePart(...);

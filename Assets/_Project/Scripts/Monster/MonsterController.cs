@@ -11,6 +11,9 @@ public class MonsterController : MonoBehaviour, IDamageable
     private Quaternion _initialRotation;
     private float originSpeed;
 
+    [Header("디버프 bool")]
+    public bool isGlacial = false;
+
     void Awake()
     {
         InitMonster();
@@ -83,11 +86,13 @@ public class MonsterController : MonoBehaviour, IDamageable
     public void ApplySlow(float multiplier)
     {
         monsterStateMachine.agent.speed = originSpeed * multiplier;
+        isGlacial = true;
     }
 
     public void RemoveSlow()
     {
         monsterStateMachine.agent.speed = originSpeed;
+        isGlacial = false;
     }
     #endregion
 }

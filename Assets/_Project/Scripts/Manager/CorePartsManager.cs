@@ -6,12 +6,23 @@ using UnityEngine.UI;
 public class CorePartsManager : SingleTon<CorePartsManager>
 {
 
-    [Header("코어파츠 리스트")]
+    [Header("코어파츠 리스트(원본)")]
+    public List<CorePart> originCorePartList = new();
+
+    [Header("코어파츠 리스트(Clone)")]
     public List<CorePart> corePartList = new();
 
     [Header("보유하고있는 코어파츠 리스트")]
     public List<CorePart> ownedCorePartList = new();
 
+    protected override void Awake()
+    {
+        foreach(var corePart in originCorePartList)
+        {
+            CorePart corePartInstance = Instantiate(corePart);
+            corePartList.Add(corePartInstance);
+        }
+    }
 
     HashSet<int> ranHash = new();
     List<CorePart> currentCorePartList = new();
@@ -47,7 +58,7 @@ public class CorePartsManager : SingleTon<CorePartsManager>
             TextMeshProUGUI corePartDesc = ViewManager.Instance.corePartsView.corePartSelectBtnList[i].gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
 
             corePartImg.sprite = ViewManager.Instance.corePartsView.corePartSelectBtnList[i].currentCorePart.coreImg;
-            corePartDesc.text = ViewManager.Instance.corePartsView.corePartSelectBtnList[i].currentCorePart.coreDesc;
+            corePartDesc.text = ViewManager.Instance.corePartsView.corePartSelectBtnList[i].currentCorePart.coreDescription;
         }
     }
 

@@ -5,7 +5,8 @@ using UnityEngine;
 public class FuelIncrease : AugmentData
 {
     [Range(0f, 1f)] public float increaseRate = 0.1f;
-
+    public override bool IsUnique => false;
+    public override int Count { get; set; }    
     public override IEnumerator Execute()
     {
         TowerManager.Instance.AddFuelIncreaseBonus(increaseRate);

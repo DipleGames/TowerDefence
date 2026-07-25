@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770ce7a68c23cdc4faecb9eca7acc77d, type: 3}
   m_Name: GlacialAugment
   m_EditorClassIdentifier: 
-  augmentName: 
-  augmentDesc: 
+  augmentName: "\uBE59\uACB0 \uAC15\uD654"
+  augmentDesc: "\uC5BC\uC5B4\uC788\uB294 \uC801\uC5D0\uAC8C 1.5\uBC30\uC758 \uB370\uBBF8\uC9C0\uB97C
+    \uC90D\uB2C8\uB2E4."

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Critical : AugmentData
 {
     [SerializeField] private float criticalProb = 0.1f;
+    public override bool IsUnique => false;
+    public override int Count { get; set; }
 
     public override IEnumerator Execute()
     {

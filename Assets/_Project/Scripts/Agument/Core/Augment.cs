@@ -10,6 +10,30 @@ public class Augment : MonoBehaviour
 
     public AugmentData augment;
 
+    [SerializeField] private Image glow;
+    private Color color;
+    private bool isGlow;
+
+    void Awake()
+    {
+        color = glow.color;
+    }
+
+    void Update()
+    {
+        if (!isGlow)
+            return;
+
+        color.a = Mathf.PingPong(Time.unscaledTime * 2f, 1f);
+        glow.color = color;
+    }
+
+    public void SetUnique(bool value)
+    {
+        isGlow = value;
+        glow.gameObject.SetActive(value);
+    }
+
     public void Bind(AugmentData augment)
     {
         this.augment = augment;

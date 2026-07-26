@@ -10,8 +10,7 @@ public class AugmentManager : SingleTon<AugmentManager>
     [Header("이번 선택지")]
     public List<AugmentData> currentChoices = new List<AugmentData>();
 
-    [Header("증가 카드 버튼")]
-    public GameObject[] augmentBtns;
+    [Header("증강 카드 버튼")]
 
     public bool isAugmentSelected = false;
 
@@ -54,16 +53,21 @@ public class AugmentManager : SingleTon<AugmentManager>
         }
 
         // 버튼 전체 비활성화
-        foreach (GameObject augmentBtn in augmentBtns)
+        foreach (GameObject augmentBtn in ViewManager.Instance.augmentView.augmentBtns)
         {
+            augmentBtn.GetComponent<Augment>().SetUnique(false);
             augmentBtn.SetActive(false);
         }
 
         // 실제 선택된 증강 수만큼 버튼 활성화
         for (int i = 0; i < currentChoices.Count; i++)
         {
-            augmentBtns[i].SetActive(true);
-            augmentBtns[i].GetComponent<Augment>().Bind(currentChoices[i]);
+            ViewManager.Instance.augmentView.augmentBtns[i].SetActive(true);
+            ViewManager.Instance.augmentView.augmentBtns[i].GetComponent<Augment>().Bind(currentChoices[i]);
+            if(currentChoices[i].IsUnique)
+            {
+                ViewManager.Instance.augmentView.augmentBtns[i].GetComponent<Augment>().SetUnique(true);
+            }
         }
     }
 

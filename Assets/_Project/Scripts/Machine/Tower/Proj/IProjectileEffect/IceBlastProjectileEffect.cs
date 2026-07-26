@@ -13,7 +13,7 @@ public class IceBlastProjectileEffect : IProjectileEffect
     {
         Debug.Log("아이스 블라스트 적용");
 
-        IceTrail iceTrail = PoolManager.Instance.GetIceTrail();
+        IceTrail iceTrail = PoolManager.Instance.Get<IceTrail>();
         iceTrail.InitIceTrail(_slowMultipler); // 얼음 잔상 초기화
 
         iceTrail.transform.position = target.transform.position;

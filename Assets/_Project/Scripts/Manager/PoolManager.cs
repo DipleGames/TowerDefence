@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolManager : SingleTon<PoolManager>
@@ -27,71 +29,75 @@ public class PoolManager : SingleTon<PoolManager>
     [SerializeField] private Transform _sparkParent;
     [SerializeField] private int _sparkPoolSize = 32;
 
-
-    private ObjectPool<Projectile> _projPool;
-    private ObjectPool<HitEffect> _hitEffectPool;
-    private ObjectPool<FireTrail> _fireTrailPool;
-    private ObjectPool<IceTrail> _iceTrailPool;
-    private ObjectPool<Spark> _sparkPool;
+    private readonly Dictionary<Type, object> _pools = new();
 
     protected override void Awake()
     {
         base.Awake();
 
-        _projPool = new ObjectPool<Projectile>(_projPrefab, _projParent, _projPoolSize);
-        _hitEffectPool = new ObjectPool<HitEffect>(_hitEffectPrefab, _hitEffectParent, _hitEffectPoolSize);
-        _fireTrailPool = new ObjectPool<FireTrail>(_fireTrailPrefab, _fireTrailParent, _fireTrailPoolSize);
-        _iceTrailPool = new ObjectPool<IceTrail>(_iceTrailPrefab, _iceTrailParent, _iceTrailPoolSize);
-        _sparkPool = new ObjectPool<Spark>(_sparkPrefab, _sparkParent, _sparkPoolSize);
+        Register(_projPrefab, _projParent, _projPoolSize);
+        Register(_hitEffectPrefab, _hitEffectParent, _hitEffectPoolSize);
+        Register(_fireTrailPrefab, _fireTrailParent, _fireTrailPoolSize);
+        Register(_iceTrailPrefab, _iceTrailParent, _iceTrailPoolSize);
+        Register(_sparkPrefab, _sparkParent, _sparkPoolSize);
     }
 
-    public Projectile GetProj()
+    private void Register<T>(T prefab, Transform parent, int poolSize) where T : MonoBehaviour
     {
-        return _projPool.Get();
+        Type type = typeof(T);
+
+        if (_pools.ContainsKey(type))
+        {
+            Debug.LogWarning($"{type.Name} 풀은 이미 등록되어 있습니다.");
+            return;
+        }
+
+        ObjectPool<T> pool = new ObjectPool<T>(prefab, parent, poolSize);
+
+        _pools.Add(type, pool);
     }
 
-    public void ReturnProj(Projectile proj)
+    public T Get<T>() where T : MonoBehaviour
     {
-        _projPool.Return(proj);
+        Type type = typeof(T);
+
+        if (!_pools.TryGetValue(type, out object poolObject))
+        {
+            Debug.LogError($"{type.Name} 풀이 등록되어 있지 않습니다.");
+            return null;
+        }
+
+        if (poolObject is not ObjectPool<T> pool)
+        {
+            Debug.LogError($"{type.Name} 풀의 타입이 일치하지 않습니다.");
+            return null;
+        }
+
+        return pool.Get();
     }
 
-    public HitEffect GetHitEffect()
+    public void Return<T>(T poolObject) where T : MonoBehaviour
     {
-        return _hitEffectPool.Get();
-    }
+        if (poolObject == null)
+        {
+            Debug.LogWarning("반환하려는 오브젝트가 null입니다.");
+            return;
+        }
 
-    public void ReturnHitEffect(HitEffect hitEffect)
-    {
-        _hitEffectPool.Return(hitEffect);
-    }
+        Type type = typeof(T);
 
-    public FireTrail GetFireTrail()
-    {
-        return _fireTrailPool.Get();
-    }
+        if (!_pools.TryGetValue(type, out object registeredPool))
+        {
+            Debug.LogError($"{type.Name} 풀이 등록되어 있지 않습니다.");
+            return;
+        }
 
-    public void ReturnFireTrail(FireTrail fireTrail)
-    {
-        _fireTrailPool.Return(fireTrail);
-    }
+        if (registeredPool is not ObjectPool<T> pool)
+        {
+            Debug.LogError($"{type.Name} 풀의 타입이 일치하지 않습니다.");
+            return;
+        }
 
-    public IceTrail GetIceTrail()
-    {
-        return _iceTrailPool.Get();
-    }
-
-    public void ReturnIceTrail(IceTrail iceTrail)
-    {
-        _iceTrailPool.Return(iceTrail);
-    }
-
-    public Spark GetSpark()
-    {
-        return _sparkPool.Get();
-    }
-
-    public void ReturnSpark(Spark spark)
-    {
-        _sparkPool.Return(spark);
+        pool.Return(poolObject);
     }
 }

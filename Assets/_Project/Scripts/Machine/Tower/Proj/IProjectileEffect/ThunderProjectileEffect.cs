@@ -13,7 +13,7 @@ public class ThunderProjectileEffect : IProjectileEffect
 
     public void Apply(MonsterController target)
     {
-        Spark spark = PoolManager.Instance.GetSpark();
+        Spark spark = PoolManager.Instance.Get<Spark>();
         spark.InitSpark(_thunderDamage);
         target.ApplyStun(_stunTime);
         spark.transform.position = target.transform.position;

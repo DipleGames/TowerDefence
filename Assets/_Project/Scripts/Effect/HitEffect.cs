@@ -13,7 +13,7 @@ public class HitEffect : MonoBehaviour, IPoolable
     {
         if (!_ps.IsAlive(true))
         {
-            PoolManager.Instance.ReturnHitEffect(this);
+            PoolManager.Instance.Return<HitEffect>(this);
         }
     }
 

@@ -13,7 +13,7 @@ public class IceTrail : MonoBehaviour, IPoolable
 
         if (_t >= _lifeTime)
         {
-            PoolManager.Instance.ReturnIceTrail(this);
+            PoolManager.Instance.Return<IceTrail>(this);
         }
     }
 

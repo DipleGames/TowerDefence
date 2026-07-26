@@ -16,7 +16,7 @@ public class FireTrail : MonoBehaviour, IPoolable
 
         if (_t >= _lifeTime)
         {
-            PoolManager.Instance.ReturnFireTrail(this);
+            PoolManager.Instance.Return<FireTrail>(this);
         }
     }
 

@@ -102,8 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterModel: {fileID: -2122931817143144962}
-  monsterStateMachine: {fileID: 0}
+  monsterStateMachine: {fileID: 5051712525032908690}
   _slider: {fileID: 2896288429754730975}
+  isGlacial: 0
 --- !u!1 &4370712368182839181
 GameObject:
   m_ObjectHideFlags: 0

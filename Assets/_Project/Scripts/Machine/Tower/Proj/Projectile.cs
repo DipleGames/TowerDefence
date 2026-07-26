@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour, IPoolable
 
         if (_target == null)
         {
-            PoolManager.Instance.ReturnProj(this);
+            PoolManager.Instance.Return<Projectile>(this);
             return;
         }
 
@@ -61,7 +61,7 @@ public class Projectile : MonoBehaviour, IPoolable
             }
         }
 
-        PoolManager.Instance.ReturnProj(this);
+        PoolManager.Instance.Return<Projectile>(this);
     }
 
     public void OnSpawnFromPool()

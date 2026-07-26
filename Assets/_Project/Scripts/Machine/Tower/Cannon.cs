@@ -22,7 +22,7 @@ public class Cannon : MonoBehaviour
 
     public void Shot()
     {
-        Projectile proj = PoolManager.Instance.GetProj();
+        Projectile proj = PoolManager.Instance.Get<Projectile>();
         TowerModel tower = GetComponentInParent<TowerModel>();
         MonsterController targetMC = _currentTarget.GetComponent<MonsterController>();
 

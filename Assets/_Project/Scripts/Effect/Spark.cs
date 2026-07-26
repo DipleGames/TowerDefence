@@ -16,7 +16,7 @@ public class Spark : MonoBehaviour, IPoolable
         if (!_isReturning && !_ps.IsAlive(true))
         {
             _isReturning = true;
-            PoolManager.Instance.ReturnSpark(this);
+            PoolManager.Instance.Return<Spark>(this);
         }
     }
 

@@ -31,19 +31,16 @@ public class AugmentManager : SingleTon<AugmentManager>
     {
         currentChoices.Clear();
 
-        // 현재 등장 가능한 증강만 따로 모음
         List<AugmentData> availableAugments = new List<AugmentData>();
 
         foreach (AugmentData augment in allAugments)
         {
-            // 유니크 증강인데 이미 1번 이상 획득했다면 제외
             if (augment.IsUnique && augment.Count >= 1)
                 continue;
 
             availableAugments.Add(augment);
         }
 
-        // 후보를 섞어서 최대 3개 선택
         while (currentChoices.Count < 3 && availableAugments.Count > 0)
         {
             int randomIndex = Random.Range(0, availableAugments.Count);
@@ -52,22 +49,27 @@ public class AugmentManager : SingleTon<AugmentManager>
             availableAugments.RemoveAt(randomIndex);
         }
 
-        // 버튼 전체 비활성화
-        foreach (GameObject augmentBtn in ViewManager.Instance.augmentView.augmentBtns)
+        GameObject[] augmentButtons = ViewManager.Instance.augmentView.augmentBtns;
+
+        foreach (GameObject buttonObject in augmentButtons)
         {
-            augmentBtn.GetComponent<Augment>().SetUnique(false);
-            augmentBtn.SetActive(false);
+            Augment augmentButton = buttonObject.GetComponent<Augment>();
+
+            augmentButton.SetUnique(false);
+            buttonObject.SetActive(false);
         }
 
-        // 실제 선택된 증강 수만큼 버튼 활성화
         for (int i = 0; i < currentChoices.Count; i++)
         {
-            ViewManager.Instance.augmentView.augmentBtns[i].SetActive(true);
-            ViewManager.Instance.augmentView.augmentBtns[i].GetComponent<Augment>().Bind(currentChoices[i]);
-            if(currentChoices[i].IsUnique)
-            {
-                ViewManager.Instance.augmentView.augmentBtns[i].GetComponent<Augment>().SetUnique(true);
-            }
+            GameObject buttonObject = augmentButtons[i];
+
+            Augment augmentButton = buttonObject.GetComponent<Augment>();
+
+            AugmentData augmentData = currentChoices[i];
+
+            buttonObject.SetActive(true);
+            augmentButton.Bind(augmentData);
+            augmentButton.SetUnique(augmentData.IsUnique);
         }
     }
 

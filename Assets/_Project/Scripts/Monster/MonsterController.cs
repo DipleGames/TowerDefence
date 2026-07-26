@@ -43,7 +43,7 @@ public class MonsterController : MonoBehaviour, IDamageable
     {
         float realDamage = amount / monsterModel.CurrentArmor;
         monsterModel.CurrentHP -= realDamage;
-        HitEffect hitEffect = PoolManager.Instance.GetHitEffect();
+        HitEffect hitEffect = PoolManager.Instance.Get<HitEffect>();
         hitEffect.transform.position = transform.position;
         ViewManager.Instance.monsterView.UpdateHPBar(monsterModel, _slider);
     }
